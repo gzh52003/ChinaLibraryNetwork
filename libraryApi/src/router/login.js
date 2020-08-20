@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-// const crypto = require('crypto');
+const crypto = require('crypto');
 
 const token = require('../utils/token');
 
 const { formatData,md5 } = require('../utils/tools');
 const mongo = require('../utils/mongo');
+const {password_privateKey}=require("../config.json");
 
 // 登录
 router.get('/', async (req, res) => {
@@ -20,9 +21,9 @@ router.get('/', async (req, res) => {
     }
 
     // 加密后进行查询
-    // const hash = crypto.createHash('md5');
-    // hash.update(password + 'laoxie'); // 加盐 盐值
-    // password = hash.digest('hex');
+     const hash = crypto.createHash('md5');
+     hash.update(password + password_privateKey); // 加盐 盐值
+     password = hash.digest('hex');
 
     password = md5(password)
 
@@ -34,10 +35,10 @@ router.get('/', async (req, res) => {
         if (mdl === 'true') {
             // token的操作
             // 1. 生成token
-            // const token = jwt.sign({ username }, 'laoxie' ,{
-            //     // token有效期
-            //     expiresIn: 20//1000 * 60 * 60 * 24 * 7
-            // });
+             const token = jwt.sign({ username }, password_privateKey ,{
+                 // token有效期
+                 expiresIn: 20//1000 * 60 * 60 * 24 * 7
+             });
 
             authorization = token.create({ username }, '7d')
         }else{

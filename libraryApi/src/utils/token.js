@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const privateKey = 'laoxie';
+const {privateKey:token_privateKey} = require('../config.json');
 
 function create(data={},expiresIn='2h'){
     const token = jwt.sign({ ...data }, privateKey ,{
