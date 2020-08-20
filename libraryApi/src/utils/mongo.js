@@ -2,7 +2,7 @@
  * MongoDB操作封装
  */
 const { MongoClient,ObjectId } = require('mongodb');
-const mongoconfig = require('../mongo.json');
+const mongoconfig = require('../mongo.config');
 
 // mongodb数据库地址
 const url = mongoconfig.url;
