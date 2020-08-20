@@ -3,7 +3,10 @@
     <el-header class="header">
       <el-row>
         <el-col :span="12" class="logo">
-          <i class="el-icon-connection"></i>金锋后台管理系统
+          <i>
+            <img src="../public/images/logo.png" alt="">
+          </i>
+          <span>中国图书网后台管理系统</span>
         </el-col>
         <el-col :span="12" style="text-align:right">
           <el-button type="text">注册</el-button>
@@ -20,8 +23,8 @@
           mode="vertical"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ff0"
           @select="changeMenu"
+          active-text-color="#409EFF"
           :default-openeds="openMenu"
           router
         >
@@ -34,18 +37,19 @@
               <template v-slot:title>
                 <i :class="item.icon" style="color:#fff"></i>{{item.text}}
               </template>
-              <el-menu-item :key="sub.path" :index="item.path+sub.path" v-for="sub in item.submenu">{{sub.text}}</el-menu-item>
+              <el-menu-item :key="sub.path" :index="item.path+sub.path" v-for="sub in item.submenu">{{sub.text}}
+              </el-menu-item>
             </el-submenu>
           </template>
         </el-menu>
       </el-aside>
       <el-main>
-        <el-breadcrumb separator-class="el-icon-arrow-right">
+        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
+        </el-breadcrumb> -->
         <div style="padding:15px 0;">
           <router-view />
         </div>
@@ -73,24 +77,57 @@ export default {
           icon: "el-icon-user-solid",
           submenu: [
             {
-              text: "添加用户",
-              path: "/add",
-            },
-            {
               text: "用户列表",
               path: "/list",
+              icon: "el-icon-menu",
+            },
+          ],
+        },
+        {
+          text: "权限管理",
+          path: "/power",
+          icon: "el-icon-copy-document",
+          submenu: [
+            {
+              text: "角色列表",
+              path: "/roles",
+              icon: "el-icon-menu",
+            },
+            {
+              text: "权限列表",
+              path: "/list",
+              icon: "el-icon-menu",
             },
           ],
         },
         {
           text: "商品管理",
           path: "/goods",
-          icon: "el-icon-grape",
+          icon: "el-icon-goods",
+          submenu: [
+            {
+              text: "商品列表",
+              path: "/list",
+              icon: "el-icon-menu",
+            },
+            {
+              text: "商品添加/修改",
+              path: "/add",
+              icon: "el-icon-menu",
+            },
+          ],
         },
         {
           text: "订单管理",
           path: "/order",
           icon: "el-icon-s-order",
+          submenu: [
+            {
+              text: "订单列表",
+              path: "/list",
+              icon: "el-icon-menu",
+            },
+          ],
         },
       ],
       currentIndex: 0,
@@ -112,6 +149,7 @@ export default {
   },
   components: {},
 };
+
 </script>
 
 <style lang="scss">
@@ -121,16 +159,19 @@ body {
   height:100%
 }
 .header {
-  line-height: 60px;
+  line-height: 40px;
   color: #fff;
   background-color: rgba(84, 92, 100, 0.9);
   .logo {
     font-size: 24px;
-    color: #fc0;
+    color: #fff;
     i {
       font-size: 40px;
       vertical-align: middle;
       margin-right: 5px;
+      img{
+        margin:3px;
+      }
     }
   }
 }
