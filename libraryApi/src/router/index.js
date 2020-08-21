@@ -2,7 +2,11 @@ const { Router, urlencoded, json } = require('express');
 // express.json===bodyParse.json, ....
 const session = require('express-session')
 const token = require('../utils/token');
-const cors = require('../filter/cors')
+const cors = require('../filter/cors');
+
+//引入配置文件
+const config = require('../config.json')
+
 
 const router = Router();
 
@@ -14,6 +18,7 @@ const loginRouter = require('./login');
 const vcodeRouter = require('./vcode');
 const uploadRouter = require('./upload');
 const { formatData } = require('../utils/tools');
+const userinfoRouter = require('./userinfo/user');
 
 // CORS跨域
 router.use(cors);
@@ -37,7 +42,9 @@ router.use(session({
 
 
 // /api/user
-router.use('/user', userRouter);
+// router.use('/user', userRouter);
+//api/userinfo 获取用户信息
+router.use('/userinfo',userinfoRouter);
 
 // /api/goods
 router.use('/goods', goodsRouter);
@@ -58,12 +65,12 @@ router.get('/jwtverify',(req,res)=>{
 
     // verify方法校验成功：得到一个对象
     // verify方法校验不通过：直接抛出错误
-    // try{
-    //     var decoded = jwt.verify(authorization, 'laoxie');
-    //     res.send(formatData())
-    // }catch(err){
-    //     res.send(formatData({code:0}))
-    // }
+    try{
+        var decoded = jwt.verify(authorization, 'laoxie');
+        res.send(formatData())
+    }catch(err){
+        res.send(formatData({code:0}))
+    }
 
     if(token.verify(authorization)){
         res.send(formatData())
