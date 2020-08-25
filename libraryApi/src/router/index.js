@@ -19,6 +19,8 @@ const vcodeRouter = require('./vcode');
 const uploadRouter = require('./upload');
 const { formatData } = require('../utils/tools');
 const userinfoRouter = require('./userinfo/user');
+//发送邮箱
+const sendRouter = require("./sendEmail");
 
 // CORS跨域
 router.use(cors);
@@ -79,6 +81,8 @@ router.get('/jwtverify',(req,res)=>{
     }
 });
 
+//发送邮件
+router.use('/send', sendRouter);
 
 // 验证码
 router.use('/vcode', vcodeRouter);

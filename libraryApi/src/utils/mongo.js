@@ -68,10 +68,21 @@ async function insert(colName,data){
 // 删
 async function remove(colName,query){ // query{_id:'5c128cdbd1233ce12c878a32'}
     const {db,client} = await connect();
-
-    if(query._id && typeof query._id === 'string'){
-        query._id = ObjectId(query._id);
+    
+    if(query._id.$in){
+        query._id.$in = query._id.$in.map(item=>{
+            if(item && typeof item === 'string'){
+                item = ObjectId(item);
+            }
+            return item
+        })
+        
+    }else{
+        if(query._id && typeof query._id === 'string'){
+            query._id = ObjectId(query._id);
+        }
     }
+    
 
     const collection = db.collection(colName);
     

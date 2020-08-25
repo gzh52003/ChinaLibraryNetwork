@@ -35,12 +35,12 @@ router.post('/avatar', uploadMiddleware.single('avatar'), (req, res) => {
     // 中间件会把图片信息格式化到req.file,req.files
     console.log('file=', req.file, req.body);
     const { _id } = req.body;
-
+    console.log("_id",_id);
     // 更新用户信息
-    const avatarUrl = '/uploads/' + req.file.filename
-    mongo.update('user', { _id }, { $set: { avatarUrl } })
+    const headImg = '/uploads/' + req.file.filename
+    mongo.update('userinfo', { _id }, { $set: { headImg } })
 
-    res.send(formatData({ data: { _id, avatarUrl } }));
+    res.send(formatData({ data: { _id, headImg } }));
 })
 
 // 一次性最多传5张图片
