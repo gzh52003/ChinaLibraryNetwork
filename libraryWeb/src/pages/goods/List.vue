@@ -54,6 +54,7 @@
                 :fit="fit"
                 :src="baseurl+scope.row.url"
               >
+                <!-- {{baseurl}} -->
                 <img :src="baseurl+scope.row.url" alt />
               </el-avatar>
             </div>
@@ -175,7 +176,8 @@ export default {
       console.log("条目数：", this.pageSize);
       const data = await shuaxin(this, { page, size: this.pageSize });
       this.goodslist = data;
-      this.baseurl = this.$baseurl + "uploads/";
+      this.baseurl = this.$baseurl + "/uploads/";
+      console.log(this.baseurl);
     },
 
     goto(id) {
@@ -233,18 +235,18 @@ export default {
     this.goodslist = data.filter(function (item, index) {
       return index < 10;
     });
-    this.baseurl = this.$baseurl + "uploads/";
+    this.baseurl = this.$baseurl + "/uploads/";
   },
 };
 </script>
 <style lang="scss">
 .fenye {
-  display: flex;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .goodslist {
-  float: left;
+  float: left !important;
 }
 .addgoods {
   height: 30px;
@@ -254,7 +256,7 @@ export default {
   width: 130px;
 }
 .el-button--primary {
-  margin-top: 15px !important;
+  margin-top: 45px !important;
 }
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
@@ -262,10 +264,14 @@ export default {
 .imgbackground {
   background: #fff !important;
 }
+.imgbackground img {
+  margin-left: 10px !important;
+}
+
 //批量删除
 
 .el-button--danger {
-  margin-left: 10px !important;
-  margin-top: 15px !important;
+  margin-left: 20px !important;
+  margin-top: 45px !important;
 }
 </style>
