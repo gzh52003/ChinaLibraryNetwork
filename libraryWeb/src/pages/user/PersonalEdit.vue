@@ -33,12 +33,15 @@
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
       <el-form-item label="头像">
+        <!-- <template v-slot:default=""> -->
           <div class="demo-type">
             <el-avatar :size="220" :src.sync="headImg" @click.native="uploadImg">
               <img :src="headImg"/>
             </el-avatar>
+            <!-- <input type="text" :value="JSON.stringify(scope)"> -->
             <input type="file" name="avatar" id="avatar" style="width:0">
           </div>
+        <!-- </template> -->
       </el-form-item>
       <!-- <el-form-item label="头像">
         <div class="demo-type">
@@ -121,7 +124,7 @@ export default {
             });
           }else{
               this.$message({
-                type: "fail",
+                type: "success",
                 message: "修改失败",
             });
           }
@@ -162,16 +165,6 @@ export default {
                   message: "上传失败！",
               });
             })
-            // $.ajax({
-            //     url:"http://localhost:2003/upload",
-            //     method:"post",
-            //     data:formdata,
-            //     // cache : false,
-            //     processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
-            //     contentType : false, // 不设置Content-type请求头
-            //     success : function(){console.log(1);},
-            //     error : function(){ console.log(2);}
-            // })
         }
     }
   },

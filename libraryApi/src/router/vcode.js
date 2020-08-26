@@ -14,7 +14,8 @@ router.get('/',async (req,res)=>{
         background:'#58bc58',
         color:true,
         fontSize:50,
-        height:54
+        height:40,
+        width:90
    }
 
    // 验证码在这里生成
@@ -25,6 +26,14 @@ router.get('/',async (req,res)=>{
    req.session.vcode = captcha.text.toLowerCase();
    
    res.send(formatData({data:captcha.data}));
+})
+router.get('/checkCode',async (req,res)=>{
+   const {vcode} = req.query;
+   console.log('login.session=', req.session)
+    if (vcode !== req.session.vcode) {
+        res.send(formatData({ code: 10 }))
+        return;
+    }
 })
 
 

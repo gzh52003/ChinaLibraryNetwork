@@ -80,6 +80,7 @@ async function remove(colName, query) { // query{_id:'5c128cdbd1233ce12c878a32'}
             query._id = ObjectId(query._id);
         }
     }
+    
 
     const collection = db.collection(colName);
     const result = await collection.deleteMany(query);
@@ -118,8 +119,7 @@ async function find(colName, query = {}, options = {}) { // options={litmit:10,s
     if (options.field) {
         opt.projection = options.field;
     }
-    let result = collection.find(query, opt); // 50->10
-
+    let result = collection.find(query,opt); // 50->10
 
     // 判断是否要跳过记录
     if (options.skip) {
@@ -151,9 +151,31 @@ async function find(colName, query = {}, options = {}) { // options={litmit:10,s
     return result
 }
 
+async function findcount(colName,query={},options={}){
+    const {client,db} = await connect();
+    
+    const collection = db.collection(colName);
+    // 查询到数据集合
+    const opt = {}
+    if(options.field){
+        opt.projection = options.field;
+    }
+    let result = collection.find(query,opt);
+    let zcount = 0,page = 0;
+    result = await result.toArray();
+    client.close();
+    let size = await options.limit;
+    zcount = result.length;
+    if(zcount%size !== 0){
+        page = Math.ceil(zcount/size)
+    }
+    return {count:zcount,page}
+}
+
 module.exports = {
     insert,
     remove,
     update,
-    find
+    find,
+    findcount
 }
