@@ -8,9 +8,8 @@
           </i>
           <span>中国图书网后台管理系统</span>
         </el-col>
-        <el-col :span="12" style="text-align:right">
-          <el-button type="text">注册</el-button>
-          <el-button type="text">登录</el-button>
+        <el-col :span="12" style="text-align:right;heigth">
+          <el-button type="text">注销</el-button>
         </el-col>
       </el-row>
     </el-header>

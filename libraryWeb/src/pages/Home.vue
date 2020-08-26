@@ -1,15 +1,15 @@
 <template>
     <div>
-        Home
+        welcome to Backstage Management System
     </div>
 </template>
 <script>
 export default {
-    beforeDestroy(){
-        console.log('beforeDestroy')
-    },
-    destroyed(){
-        console.log('destroyed')
-    }
+    
 }
 </script>
+<style>
+ body,html{
+     font-size:30px;
+ }
+</style>

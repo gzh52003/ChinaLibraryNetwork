@@ -120,6 +120,7 @@ async function find(colName, query = {}, options = {}) { // options={litmit:10,s
         opt.projection = options.field;
     }
     let result = collection.find(query,opt); // 50->10
+    
 
     // 判断是否要跳过记录
     if (options.skip) {
