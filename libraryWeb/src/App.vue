@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="12" class="logo" style="height: 60px;">
           <i>
-            <!-- <img src="../public/images/logo.png" alt=""> -->
+            <img src="../public/images/logo.png" alt="">
           </i>
           <span>中国图书网后台管理系统</span>
         </el-col>
