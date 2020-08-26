@@ -2,14 +2,14 @@
   <el-container style="height:100%" v-cloak>
     <el-header class="header">
       <el-row>
-        <el-col :span="12" class="logo">
+        <el-col :span="12" class="logo" style="height: 60px;">
           <i>
             <img src="../public/images/logo.png" alt="">
           </i>
           <span>中国图书网后台管理系统</span>
         </el-col>
-        <el-col :span="12" style="text-align:right;heigth">
-          <el-button type="text">注销</el-button>
+        <el-col :span="12" style="text-align:right;height: 60px;">
+          <el-button class="cancella" type="text" @click="cancellation" >注销</el-button>
         </el-col>
       </el-row>
     </el-header>
@@ -156,6 +156,13 @@ export default {
     changeMenu(path) {
       this.activeIndex = path;
     },
+    cancellation(){
+      this.$setCookie("password","",0);
+      this.$setCookie("login","",0);
+      this.$setCookie("token","",false);
+      this.$setCookie("id","",false);
+      this.$router.push("/login")
+    }
   },
   components: {},
 };
@@ -193,5 +200,9 @@ body {
 
 [v-cloak] {
     display: none !important;
+}
+.cancella>span{
+  color: #fff;
+  font-size: 16px;
 }
 </style>
