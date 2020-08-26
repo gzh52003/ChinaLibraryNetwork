@@ -34,7 +34,7 @@ const router = new VueRouter({
     routes: [
         
         {
-            path: '/', // /->/home
+            path: '/', 
             redirect: '/home',
             
         },
@@ -58,17 +58,11 @@ const router = new VueRouter({
                 {
                     path: '/user',
                     component: User,
-                    meta: {
-                        requireAuth: true
-                      },
                     children: [
                         // 进入用户管理页面直接跳到用户列表
                         {
                             path: '',
-                            redirect: 'list',
-                            meta: {
-                                requireAuth: true
-                              },
+                            redirect: 'list'
                         }, {
                             path: 'add',
                             component: UserAdd,
@@ -95,6 +89,7 @@ const router = new VueRouter({
                 {
                     path: '/power',
                     component: Power,
+					
                     children: [
                         // 进入用户管理页面直接跳到用户列表
                         {
@@ -102,10 +97,16 @@ const router = new VueRouter({
                             redirect: 'list'
                         }, {
                             path: 'list',
-                            component: PowerList
+                            component: PowerList,
+							meta: {
+								requireAuth: true
+							}
                         }, {
                             path: 'roles',
-                            component:  PowerRoles
+                            component:  PowerRoles,
+							meta: {
+								requireAuth: true
+							}
                         }]
                     
                 },
@@ -119,7 +120,10 @@ const router = new VueRouter({
                             redirect: 'list'
                         }, {
                             path: 'list',
-                            component: OrderList
+                            component: OrderList,
+							meta: {
+								requireAuth: true
+							}
                         }]
                 },
                 {
@@ -132,10 +136,16 @@ const router = new VueRouter({
                             redirect: 'list'
                         }, {
                             path: 'add',
-                            component: GoodsAdd
+                            component: GoodsAdd,
+							meta: {
+								requireAuth: true
+							}
                         }, {
                             path: 'list',
-                            component: GoodsList
+                            component: GoodsList,
+							meta: {
+								requireAuth: true
+							}
                         }]
                     
                 },{
