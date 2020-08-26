@@ -35,11 +35,13 @@ const router = new VueRouter({
         
         {
             path: '/', // /->/home
-            redirect: '/home'
+            redirect: '/home',
+            
         },
         {
             path: '/',
             component: App,
+            
             children: [
                 // 进入用户管理页面直接跳到用户列表
                 {
@@ -48,27 +50,46 @@ const router = new VueRouter({
                 },
                 {
                     path: '/home',
-                    component: Home
+                    component: Home,
+                    meta: {
+                        requireAuth: true
+                      },
                 }, 
                 {
                     path: '/user',
                     component: User,
+                    meta: {
+                        requireAuth: true
+                      },
                     children: [
                         // 进入用户管理页面直接跳到用户列表
                         {
                             path: '',
-                            redirect: 'list'
+                            redirect: 'list',
+                            meta: {
+                                requireAuth: true
+                              },
                         }, {
                             path: 'add',
-                            component: UserAdd
+                            component: UserAdd,
+
+                            meta: {
+                                requireAuth: true
+                              },
                         }, {
                             name:'userList',
                             path: 'list',
-                            component: UserList
+                            component: UserList,
+                            meta: {
+                                requireAuth: true
+                              },
                         }, {
                             name:'userEdit',
                             path: 'edit/:id',
-                            component: UserEdit
+                            component: UserEdit,
+                            meta: {
+                                requireAuth: true
+                              },
                         }]
                 },
                 {
@@ -117,6 +138,14 @@ const router = new VueRouter({
                             component: GoodsList
                         }]
                     
+                },{
+                    name:'personal',
+                    path:'/personal',
+                    component: PersonalEdit,
+                    meta: {
+                        requireAuth: true
+                      }
+        
                 }]
         },
         {
@@ -126,11 +155,6 @@ const router = new VueRouter({
         {
             path: '/reg',
             component: Reg
-        },{
-            name:'personal',
-            path:'/personal',
-            component: PersonalEdit
-
         },
         {
             path: '/404',
@@ -145,5 +169,23 @@ const router = new VueRouter({
 })
 
 export default router;
+router.beforeEach((to, from, next) => {
+    if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+      if (Vue.prototype.$getCookie("token") == 'true') { // 判断本地是否存在token
+        next()
+      } else {
+        // 未登录,跳转到登陆页面
+        next({
+          path: '/login'
+        })
+      }
+    } else {
+      if(Vue.prototype.$getCookie("token") == 'true'){
+        next('/home');
+      }else{
+        next();
+      }
+    }
+  });
 
 console.log('router=', router);

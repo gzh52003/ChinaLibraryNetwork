@@ -75,6 +75,8 @@ export default {
                             console.log($vue.$setCookie);
                             $vue.$setCookie(key,data.data[key])
                         }
+                        
+                        $vue.$setCookie("token", 'true');
                         // $vue.$router
                         $vue.$router.push("/home")
                         
