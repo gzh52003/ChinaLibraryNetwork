@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="12" class="logo">
           <i>
-            <img src="../public/images/logo.png" alt="">
+            <!-- <img src="../public/images/logo.png" alt=""> -->
           </i>
           <span>中国图书网后台管理系统</span>
         </el-col>
@@ -29,16 +29,20 @@
           router
         >
           <template v-for="item in menu">
-            <el-menu-item :index="item.path" :key="item.path"  v-if="!item.submenu">
+            <el-menu-item :index="item.path" :key="item.path" v-if="!item.submenu">
               <i :class="item.icon" style="color:#fff"></i>
               {{item.text}}
             </el-menu-item>
             <el-submenu :key="item.path" :index="item.path" v-else>
               <template v-slot:title>
-                <i :class="item.icon" style="color:#fff"></i>{{item.text}}
+                <i :class="item.icon" style="color:#fff"></i>
+                {{item.text}}
               </template>
-              <el-menu-item :key="sub.path" :index="item.path+sub.path" v-for="sub in item.submenu">{{sub.text}}
-              </el-menu-item>
+              <el-menu-item
+                :key="sub.path"
+                :index="item.path+sub.path"
+                v-for="sub in item.submenu"
+              >{{sub.text}}</el-menu-item>
             </el-submenu>
           </template>
         </el-menu>
@@ -49,7 +53,7 @@
           <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb> -->
+        </el-breadcrumb>-->
         <div style="padding:15px 0;">
           <router-view />
         </div>
@@ -64,7 +68,7 @@ export default {
   data() {
     return {
       activeIndex: "/home",
-      openMenu:[],
+      openMenu: [],
       menu: [
         {
           text: "首页",
@@ -110,8 +114,9 @@ export default {
               path: "/list",
               icon: "el-icon-menu",
             },
+
             {
-              text: "商品添加/修改",
+              text: "商品添加",
               path: "/add",
               icon: "el-icon-menu",
             },
@@ -149,14 +154,15 @@ export default {
   },
   components: {},
 };
-
 </script>
 
 <style lang="scss">
-html{height:100%}
+html {
+  height: 100%;
+}
 body {
   margin: 0;
-  height:100%
+  height: 100%;
 }
 .header {
   line-height: 40px;
@@ -169,8 +175,8 @@ body {
       font-size: 40px;
       vertical-align: middle;
       margin-right: 5px;
-      img{
-        margin:3px;
+      img {
+        margin: 3px;
       }
     }
   }

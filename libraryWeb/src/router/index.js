@@ -16,6 +16,7 @@ import Order from '../pages/order/Default.vue'
 import OrderList from '../pages/order/List.vue'
 import Goods from '../pages/goods/Default.vue'
 import GoodsList from '../pages/goods/List.vue'
+import GoodsEdit from '../pages/goods/Edit.vue'
 import GoodsAdd from '../pages/goods/Add.vue'
 import Reg from '../pages/Reg.vue'
 import Login from '../pages/Login.vue'
@@ -52,7 +53,7 @@ const router = new VueRouter({
                     path: 'list',
                     component: UserList
                 }, {
-                    name:'userEdit',
+                    name: 'userEdit',
                     path: 'edit/:id',
                     component: UserEdit
                 }]
@@ -70,9 +71,9 @@ const router = new VueRouter({
                     component: PowerList
                 }, {
                     path: 'roles',
-                    component:  PowerRoles
+                    component: PowerRoles
                 }]
-            
+
         },
         {
             path: '/order',
@@ -96,13 +97,22 @@ const router = new VueRouter({
                     path: '',
                     redirect: 'list'
                 }, {
+                    name: 'goodsAdd',
                     path: 'add',
                     component: GoodsAdd
+                },
+                {
+                    name: 'goodsEdit',
+                    path: 'edit',
+                    component: GoodsEdit
                 }, {
+
                     path: 'list',
                     component: GoodsList
-                }]
-            
+                },
+
+            ]
+
         },
         {
             path: '/login',
