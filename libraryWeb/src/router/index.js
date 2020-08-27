@@ -23,6 +23,7 @@ import GoodsAdd from '../pages/goods/Add.vue'
 import Reg from '../pages/Reg.vue'
 import Login from '../pages/Login.vue'
 import NotFound from '../pages/NotFound.vue'
+import $request from '../utils/request'
 
 
 
@@ -64,8 +65,9 @@ const router = new VueRouter({
                             path: '',
                             redirect: 'list'
                         }, {
+                            name:"userAdd",
                             path: 'add',
-                            component: UserAdd,
+                            component: UserEdit,
 
                             meta: {
                                 requireAuth: true
@@ -151,7 +153,7 @@ const router = new VueRouter({
                 },{
                     name:'personal',
                     path:'/personal',
-                    component: PersonalEdit,
+                    component: UserEdit,
                     meta: {
                         requireAuth: true
                       }
@@ -179,24 +181,30 @@ const router = new VueRouter({
 })
 
 export default router;
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-        //
-        console.log(sessionStorage.getItem("token"));
-      if (sessionStorage.getItem("token") == 'true') { // 判断本地是否存在token
-        next()
-      } else {
-        // 未登录,跳转到登陆页面
-        next({
-          path: '/login'
-        })
-      }
+        let user = localStorage.getItem("user")||{};
+        try {
+            user = JSON.parse(user);
+        } catch (error) {
+            user = {};
+        }
+        //把token发送给后端，校验token是否正确
+        if(!user.authorization) next({path: '/login'});
+        else{ // 判断本地是否存在token
+            const {data} = await $request.get("/jwtverify",{
+                params:{
+                    authorization:user.authorization
+                }
+            })
+            console.log("验证token值：",data);
+            if(data.code === 1)next();
+            else next({path: '/login'});
+        }
+      
     } else {
-      if(sessionStorage.getItem("token") == 'true'){
-        next('/home');
-      }else{
-        next();
-      }
+      next();
     }
   });
 

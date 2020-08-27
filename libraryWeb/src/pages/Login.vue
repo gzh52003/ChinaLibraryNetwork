@@ -13,10 +13,17 @@
             <el-form-item label="PassWord" prop="password">
                 <el-input type="password" v-model="formLabelAlign.password"></el-input>
             </el-form-item>
-            <!-- <el-form-item class="remember">
+            <el-form-item class="Vcode-item" label="Vcode" prop="vcode">
+                <el-input type="text" v-model="formLabelAlign.vcode"></el-input>
+                <div class="vcode" @click="getVcode" id="Vcode">
+                    <img src="http://localhost:2003/uploads/avatar-1598079578699.jpg" alt="">
+                    <span class="vcode-span">获取验证码</span>
+                </div>
+            </el-form-item>
+            <el-form-item class="remember">
                 <el-checkbox v-model="remember">Remember Me</el-checkbox>
                 <el-button type="text">Reqlster</el-button>
-            </el-form-item> -->
+            </el-form-item>
             <el-form-item class="btn">
                 <el-button type="primary" @click="submitForm">Login</el-button>
             </el-form-item>
@@ -34,10 +41,11 @@ export default {
     data() {
       return {
         labelPosition: 'right',
-        remember: false,
+        remember: true,
         formLabelAlign: {
           username: '',
           password: '',
+          vcode:""
           
         },
         rules:{
@@ -49,10 +57,24 @@ export default {
                 { required: true, message: "密码必填", trigger: ['blur', 'change'] },
                 
             ],
+            vcode:[
+                { required: true, message: "验证码必填", trigger: ['blur', 'change'] },
+                
+            ]
         }
       };
     },
     methods: {
+        async getVcode(){
+            //点击获取验证码
+            const {data} = await this.$request.get("/vcode");
+            console.log(data);
+            if(data.code === 1){
+                console.log(1);
+                document.querySelector("#Vcode").innerHTML = data.data
+            }
+            
+        },
         goto(){
             this.$router.push("/reg")
         },
@@ -61,19 +83,18 @@ export default {
                 if (valid) {
                     const {formLabelAlign} = this
                     const {data} = await this.$request.get("/login",
-                    {params:{...formLabelAlign}});
+                    {params:{mdl:this.remember,...formLabelAlign}});
                     if(data.code === 1){
-                        // this.$message({
-                        //     type:"success",
-                        //     message:"登录成功"
-                        // });
                         
                         //登录成功后保存cookie
-                        for(let key in data.data){
-                            sessionStorage.setItem(key,data.data[key])
-                        }
+                        // for(let key in data.data){
+                        //     sessionStorage.setItem(key,data.data[key])
+                        // }
                         
-                        sessionStorage.setItem("token", 'true');
+                        // sessionStorage.setItem("token", 'true');
+
+                        //把用户信息保存到本地
+                        localStorage.setItem("user",JSON.stringify(data.data));
                         // $vue.$router
                         $vue.$router.push("/home")
                         
@@ -105,7 +126,7 @@ export default {
     }
     .wrap{
         width: 500px;
-        height: 500px;
+        height: 550px;
         background: rgba(253, 250, 250,0.5);
         border: 5px solid rgba(253, 250, 250,0.5);
         margin:auto;
@@ -163,12 +184,18 @@ export default {
             right: 0;
         }
     }
-    .btn .el-form-item__content{
-        width: 79% !important;
-        .el-button{
-            width: 100%;
+    
+    .btn{
+        .el-form-item__content{
+            width: 79% !important;
+            .el-button{
+                width: 100%;
+            }
         }
-    }
+        .el-button--primary{
+            margin-top:0 !important
+        }
+    } 
     .el-button--text{
         color: #606266 !important;
     }

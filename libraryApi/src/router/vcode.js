@@ -34,6 +34,7 @@ router.get('/checkCode',async (req,res)=>{
         res.send(formatData({ code: 10 }))
         return;
     }
+    res.send(formatData({ code: 1 }))
 })
 
 

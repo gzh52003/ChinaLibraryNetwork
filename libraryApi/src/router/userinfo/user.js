@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const mongo = require('../../utils/mongo');
+const crypto = require('crypto');
 const {formatData,md5} = require('../../utils/tools');
+const {password_privateKey}=require("../../config.json");
 
 //获取用户列表
 router.get('/',async (req,res)=>{
@@ -72,7 +74,24 @@ router.put('/:id',async (req,res)=>{
         // console.log('err=',err);
         res.send(formatData({code:0}))
     }
+})
+
+router.post('/',async (req,res)=>{
+    let {login,username,password,gender,age,email,role,baseurl,headImg} = req.body;
     
+    const hash = crypto.createHash('md5');
+    hash.update(password+password_privateKey); // 加盐 盐值
+    password = hash.digest('hex');
     
+    password = md5(password)
+    let result,userres
+    try{
+        result = await mongo.insert('userinfo',{login,username,gender,age,email,role,baseurl,headImg});
+        userres = await mongo.insert('user',{login,password});
+        res.send(formatData());
+    }catch(err){
+        res.send(forMatData({code:0}))
+
+    }
 })
 module.exports = router;

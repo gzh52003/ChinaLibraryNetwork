@@ -89,8 +89,11 @@ export default {
           submenu: [
             {
               text: "用户列表",
-              path: "/list",
-              icon: "el-icon-menu",
+              path: "/list"
+            },
+            {
+              text: "添加用户",
+              path: "/add"
             },
           ],
         },
@@ -164,10 +167,7 @@ export default {
       this.activeIndex = path;
     },
     cancellation(){
-      sessionStorage.removeItem("password");
-      sessionStorage.removeItem("login");
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("id");
+      localStorage.removeItem("user")
       this.$router.push("/login")
     }
   },

@@ -62,12 +62,15 @@ export default {
                 
         };
         const checkCode = async (rule, value, callback) => {
-            
+            console.log(value);
             if(value.length > 3){
                 const {data} = await this.$request.get("/vcode/checkCode",
                 {params:{"vcode":value}});
+
+                if(data.code !== 1)callback(new Error("请输入正确的验证码"));
             }else{
-                return callback(new Error("请输入验证码"));
+                callback(new Error("请输入验证码"));
+                return
             }
             callback();
         };
@@ -96,13 +99,13 @@ export default {
                     trigger: ['blur', 'change'],
                 },
             ],
-            // code:[
-            //     { required: true, message: "验证码必填", trigger: ['blur', 'change'] },
-            //     {
-            //         validator: checkCode,
-            //         trigger: ['blur', 'change'],
-            //     },
-            // ]
+            code:[
+                { required: true, message: "验证码必填", trigger: ['blur', 'change'] },
+                {
+                    validator: checkCode,
+                    trigger: ['blur', 'change'],
+                },
+            ]
         }
       };
     },
