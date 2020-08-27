@@ -19,7 +19,8 @@ import Order from '../pages/order/Default.vue'
 import OrderList from '../pages/order/List.vue'
 import Goods from '../pages/goods/Default.vue'
 import GoodsList from '../pages/goods/List.vue'
-import GoodsAdd from '../pages/goods/Add.vue'
+import GoodsEdit from '../pages/goods/Edit.vue'
+// import GoodsAdd from '../pages/goods/Add.vue'
 import Reg from '../pages/Reg.vue'
 import Login from '../pages/Login.vue'
 import NotFound from '../pages/NotFound.vue'
@@ -32,16 +33,16 @@ Vue.use(VueRouter)
 const router = new VueRouter({
     // mode:'history', // 一般上线后改为history路由(需要额外配置服务器)
     routes: [
-        
+
         {
-            path: '/', 
+            path: '/',
             redirect: '/home',
-            
+
         },
         {
             path: '/',
             component: App,
-            
+
             children: [
                 // 进入用户管理页面直接跳到用户列表
                 {
@@ -53,8 +54,8 @@ const router = new VueRouter({
                     component: Home,
                     meta: {
                         requireAuth: true
-                      },
-                }, 
+                    },
+                },
                 {
                     path: '/user',
                     component: User,
@@ -69,27 +70,27 @@ const router = new VueRouter({
 
                             meta: {
                                 requireAuth: true
-                              },
+                            },
                         }, {
-                            name:'userList',
+                            name: 'userList',
                             path: 'list',
                             component: UserList,
                             meta: {
                                 requireAuth: true
-                              },
+                            },
                         }, {
-                            name:'userEdit',
+                            name: 'userEdit',
                             path: 'edit/:id',
                             component: UserEdit,
                             meta: {
                                 requireAuth: true
-                              },
+                            },
                         }]
                 },
                 {
                     path: '/power',
                     component: Power,
-					
+
                     children: [
                         // 进入用户管理页面直接跳到用户列表
                         {
@@ -98,17 +99,17 @@ const router = new VueRouter({
                         }, {
                             path: 'list',
                             component: PowerList,
-							meta: {
-								requireAuth: true
-							}
+                            meta: {
+                                requireAuth: true
+                            }
                         }, {
                             path: 'roles',
-                            component:  PowerRoles,
-							meta: {
-								requireAuth: true
-							}
+                            component: PowerRoles,
+                            meta: {
+                                requireAuth: true
+                            }
                         }]
-                    
+
                 },
                 {
                     path: '/order',
@@ -121,9 +122,9 @@ const router = new VueRouter({
                         }, {
                             path: 'list',
                             component: OrderList,
-							meta: {
-								requireAuth: true
-							}
+                            meta: {
+                                requireAuth: true
+                            }
                         }]
                 },
                 {
@@ -135,27 +136,37 @@ const router = new VueRouter({
                             path: '',
                             redirect: 'list'
                         }, {
+                            name: 'goodsAdd',
                             path: 'add',
-                            component: GoodsAdd,
-							meta: {
-								requireAuth: true
-							}
+                            component: GoodsEdit,
+                            meta: {
+                                requireAuth: true
+                            }
                         }, {
+                            name: 'goodsEdit',
+                            path: 'edit',
+                            component: GoodsEdit,
+                            meta: {
+                                requireAuth: true
+                            },
+                        },
+                        {
+                            name: 'goodsList',
                             path: 'list',
                             component: GoodsList,
-							meta: {
-								requireAuth: true
-							}
+                            meta: {
+                                requireAuth: true
+                            }
                         }]
-                    
-                },{
-                    name:'personal',
-                    path:'/personal',
+
+                }, {
+                    name: 'personal',
+                    path: '/personal',
                     component: PersonalEdit,
                     meta: {
                         requireAuth: true
-                      }
-        
+                    }
+
                 }]
         },
         {
@@ -183,21 +194,21 @@ router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
         //
         console.log(sessionStorage.getItem("token"));
-      if (sessionStorage.getItem("token") == 'true') { // 判断本地是否存在token
-        next()
-      } else {
-        // 未登录,跳转到登陆页面
-        next({
-          path: '/login'
-        })
-      }
+        if (sessionStorage.getItem("token") == 'true') { // 判断本地是否存在token
+            next()
+        } else {
+            // 未登录,跳转到登陆页面
+            next({
+                path: '/login'
+            })
+        }
     } else {
-      if(sessionStorage.getItem("token") == 'true'){
-        next('/home');
-      }else{
-        next();
-      }
+        if (sessionStorage.getItem("token") == 'true') {
+            next('/home');
+        } else {
+            next();
+        }
     }
-  });
+});
 
 console.log('router=', router);
