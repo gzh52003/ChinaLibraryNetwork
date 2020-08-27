@@ -4,9 +4,7 @@
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" :rules="rules" ref="formLabelAlign">
             <el-form-item>
                 <!-- <div class="demo-type"> -->
-                    <el-avatar :size="100" src="http://localhost:2003/uploads/avatar-1598079578699.jpg">
-                        
-                    </el-avatar>
+                    <el-avatar :size="100" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar>
                 <!-- </div> -->
             </el-form-item>
             <el-form-item label="UserName" prop="username">
@@ -65,18 +63,17 @@ export default {
                     const {data} = await this.$request.get("/login",
                     {params:{...formLabelAlign}});
                     if(data.code === 1){
-                        this.$message({
-                            type:"success",
-                            message:"登录成功"
-                        });
+                        // this.$message({
+                        //     type:"success",
+                        //     message:"登录成功"
+                        // });
                         
                         //登录成功后保存cookie
                         for(let key in data.data){
-                            console.log($vue.$setCookie);
-                            $vue.$setCookie(key,data.data[key])
+                            sessionStorage.setItem(key,data.data[key])
                         }
                         
-                        $vue.$setCookie("token", 'true');
+                        sessionStorage.setItem("token", 'true');
                         // $vue.$router
                         $vue.$router.push("/home")
                         

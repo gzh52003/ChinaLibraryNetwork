@@ -181,7 +181,9 @@ const router = new VueRouter({
 export default router;
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-      if (Vue.prototype.$getCookie("token") == 'true') { // 判断本地是否存在token
+        //
+        console.log(sessionStorage.getItem("token"));
+      if (sessionStorage.getItem("token") == 'true') { // 判断本地是否存在token
         next()
       } else {
         // 未登录,跳转到登陆页面
@@ -190,7 +192,7 @@ router.beforeEach((to, from, next) => {
         })
       }
     } else {
-      if(Vue.prototype.$getCookie("token") == 'true'){
+      if(sessionStorage.getItem("token") == 'true'){
         next('/home');
       }else{
         next();

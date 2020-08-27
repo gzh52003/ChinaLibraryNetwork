@@ -9,7 +9,9 @@
           <span>中国图书网后台管理系统</span>
         </el-col>
         <el-col :span="12" style="text-align:right;height: 60px;">
-          <el-button class="cancella" type="text" @click="cancellation" >注销</el-button>
+          <el-avatar :size="50" style="vertical-align: top;margin-top:5px;margin-right:10px" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar>
+          <span style="font-size: 16px;margin-right: 20px;vertical-align: bottom;display: inline-block;height: 42px;">管理员-老李</span>
+          <el-button style="vertical-align: bottom;" class="cancella" type="text" @click="cancellation" >注销</el-button>
         </el-col>
       </el-row>
     </el-header>
@@ -162,10 +164,10 @@ export default {
       this.activeIndex = path;
     },
     cancellation(){
-      this.$setCookie("password","",0);
-      this.$setCookie("login","",0);
-      this.$setCookie("token","",false);
-      this.$setCookie("id","",false);
+      sessionStorage.removeItem("password");
+      sessionStorage.removeItem("login");
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("id");
       this.$router.push("/login")
     }
   },
@@ -210,5 +212,12 @@ body {
 .cancella>span{
   color: #fff;
   font-size: 16px;
+}
+.el-avatar{
+  position: relative;
+  img{
+    position: absolute;
+    left: 30px;
+  }
 }
 </style>
