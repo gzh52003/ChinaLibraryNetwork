@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>商品修改</h1>
+    <h1>商品{{goodsid ? '修改' : '添加'}}</h1>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="书名" prop="title">
         <el-input v-model="ruleForm.title"></el-input>
@@ -11,7 +11,7 @@
 
       <el-form-item label="出版时间">
         <el-date-picker
-          v-model="ruleForm.value1"
+          v-model="ruleForm.pulishTiem"
           type="date"
           value-format="yyyy-MM-dd"
           placeholder="选择日期"
@@ -36,8 +36,7 @@
         <el-input type="textarea" v-model="ruleForm.recoLagu"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" @click="submitForm">修改</el-button>
-        <!-- <el-button type="success" @click="submitForm">点击添加数据</el-button> -->
+        <el-button type="success" @click="submitForm">{{goodsid ? '修改' : '添加'}}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -45,7 +44,7 @@
 <script>
 export default {
   data() {
-    //验证书名、作者等的规则
+    //验证作者等的规则
     var checksellTitle = (rule, value, callback) => {
       if (!"value") {
         // 如果输入的值不符合规则，则提示信息
@@ -66,14 +65,32 @@ export default {
       }
     };
 
-    //设置默认值
+    //判断书名是否已存在
+    var validateTitle = (rule, value, callback) => {
+      if (value.trim() === "") {
+        // 如果输入的值不符合规则，则提示信息
+        return callback(new Error("书名不能为空"));
+      } else {
+        // 发起ajax请求
+        this.$request
+          .get(`/goods/check?title=${this.ruleForm.title}&id=${this.goodsid}`)
+          .then(({ data }) => {
+            if (data.code === 0) {
+              callback(new Error("书名已存在"));
+            } else {
+              // 规则通过后的回掉
+              callback();
+            }
+          });
+      }
+    };
     return {
       //在这里给一个初始值，就会变成一个响应式属性。就会随着数据变化而变化
       goodsid: "",
       ruleForm: {
         title: "",
         author: "",
-        value1: "",
+        pulishTiem: "",
         publisher: "",
         sellPrice: "",
         discount: "",
@@ -90,7 +107,7 @@ export default {
           //required: true为必填，表单change的时候触发校验
           { required: true, message: "请输入书名", trigger: "change" },
           {
-            validator: checksellTitle,
+            validator: validateTitle,
             trigger: "change",
           },
         ],
@@ -155,6 +172,34 @@ export default {
       },
     };
   },
+  watch: {
+    // 监听实例属性，如果有变化则执行这里的代码
+    //监听是一个函数
+    // 深度监听，监听ruleForm下的gender'
+    // 'ruleForm.gender':function(){},以下是简写
+    "ruleForm.gender"(newVal, oldVal) {
+      // console.log("gender", newVal, oldVal);
+    },
+    //$route是当前信息
+    "$route.path"(newVal, oldVal) {
+      // console.log("$route change", newVal, oldVal);
+      if (newVal === "/goods/add") {
+        (this.goodsid = ""),
+          (this.ruleForm = {
+            title: "",
+            author: "",
+            pulishTiem: "",
+            publisher: "",
+            sellPrice: "",
+            discount: "",
+            priceTit: "",
+            kucun: "",
+            recoLagu: "",
+          });
+      }
+    },
+  },
+
   methods: {
     //修改数据并保存
     submitForm() {
@@ -166,17 +211,35 @@ export default {
           //所有的验证都通过时，才发送请求
           const { goodsid, ruleForm } = this;
 
-          //改数据
-          const { data } = await this.$request.put("/goods/" + goodsid, {
-            //将ruleForm下的所有内容传入put中
-            ...ruleForm,
-          });
-          if (data.code === 1) {
-            // this.$message提示信息，是elementUI、自动往原型上加的方法
-            this.$message({
-              type: "success",
-              message: "修改成功",
+          //判断有没有goodsid
+          if (goodsid) {
+            //改数据
+            const { data } = await this.$request.put("/goods/" + goodsid, {
+              //将ruleForm下的所有内容传入put中
+              ...ruleForm,
             });
+            if (data.code === 1) {
+              // this.$message提示信息，是elementUI、自动往原型上加的方法
+              this.$message({
+                type: "success",
+                message: "修改成功",
+              });
+              //跳转到编辑页面，用name跳转
+              this.$router.push({ name: "goodsList" });
+            }
+          } else {
+            //添加数据
+            const { data } = await this.$request.post("/goods", {
+              //将ruleForm下的所有内容传入put中
+              ...ruleForm,
+            });
+            // console.log(ruleForm);
+            if (data.msg === "success") {
+              this.$message({
+                type: "success",
+                message: "添加成功!",
+              });
+            }
           }
         } else {
           console.log("error submit!!");
@@ -184,17 +247,18 @@ export default {
         }
       });
     },
+    /*     async addTitle() {
+      const { data } = await this.$request.get(
+        `/goods/check?title=${this.ruleForm.title}`
+      );
+      // console.log("原函数", data);
+      return data.code;
+    }, */
   },
 
   //获取当前用户的信息，使用生命周期函数
   async created() {
-    console.log(1111);
-    // console.log("Router=", this.$router);
-    // console.log("Route=", this.$route);
-    // 使用$route传参
-    // const { a, b } = this.$route.query;
     const { id } = this.$route.params;
-
     const { data } = await this.$request.get("/goods/" + id);
     // console.log(data);
     this.goodsid = id;

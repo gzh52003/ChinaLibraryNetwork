@@ -145,8 +145,6 @@ export default {
         type: "warning",
       }).then(async () => {
         const { data } = await this.$request.delete("/goods/" + id);
-        // console.log(code);
-        // if (data.code === 1) {
         if (data === "success") {
           //重新渲染数据
           const data = await shuaxin(this);
@@ -201,7 +199,8 @@ export default {
         ["value"]: this.input3,
       });
       this.goodslist = data;
-      // console.log(data);
+      
+      console.log(data);
     },
     //批量删除
     async selsChange(sels) {

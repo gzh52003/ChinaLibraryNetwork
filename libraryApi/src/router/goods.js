@@ -6,12 +6,6 @@ const { formatData } = require('../utils/tools')
 
 
 
-
-
-
-
-
-
 // get /api/goods 查询所有商品
 router.get('/', async (req, res) => {
     let { page = 1, size, sort = "add_time", filedtype, value } = req.query;
@@ -27,34 +21,20 @@ router.get('/', async (req, res) => {
     console.log("obj", obj);
     console.log("result", result);
     res.send(result);
-    // res.send(formatData({ data: result }));
 })
 
 
 router.get('/check', async (req, res) => {
     console.log(123);
-    const { title } = req.query;
+    const { title, id } = req.query;
     console.log("333333", req.query);
     const result = await mongo.find('goods', { title });
-    console.log("666666666666", result);
-    if (result.length > 0) {
+    //console.log("666666666666", result[0]._id);
+    if (result.length > 0 && id !== result[0]._id.toString()) {
         res.send(formatData({ code: 0 }))
     } else {
         res.send(formatData())
     }
-    /*  const { title } = req.query;
-     try {
-         const result = await mongo.find('goods', { title });
-         if (result.length > 0) {
-             console.log("length 大于0");
-         }
-         res.send(formatData({ data: result }));
-     } catch (error) {
-         console.log("报错了", error);
-         res.send(formatData());
-     } */
-
-
 })
 
 
@@ -91,8 +71,6 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     const ids = id.split(",")
     console.log("id=", ids);
-
-    
     try {
         const result = await mongo.remove('goods', { _id: { $in: ids } })
         res.send('success')
@@ -118,8 +96,5 @@ router.post('/', async (req, res) => {
 
     }
 })
-
-
-
 
 module.exports = router;
