@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- 面包屑导航 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/goods' }">商品管理</el-breadcrumb-item>
+      <el-breadcrumb-item>商品列表</el-breadcrumb-item>
+    </el-breadcrumb>
     <!-- :data="goodslist"传入数据 -->
     <div class="title">
       <h1 class="goodslist">商品列表</h1>
@@ -238,7 +244,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .fenye {
   display: flex !important;
   justify-content: center !important;

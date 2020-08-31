@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- 面包屑导航 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/goods' }">商品管理</el-breadcrumb-item>
+      <el-breadcrumb-item>商品添加</el-breadcrumb-item>
+    </el-breadcrumb>
     <h1>商品{{goodsid ? '修改' : '添加'}}</h1>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="书名" prop="title">

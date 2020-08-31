@@ -3,7 +3,7 @@
     <!-- 面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>订单管理</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/order' }">订单管理</el-breadcrumb-item>
       <el-breadcrumb-item>订单列表</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 搜索框 -->
@@ -31,8 +31,8 @@
           </template>
         </el-table-column>
         <el-table-column label="是否发货" prop="is_send"></el-table-column>
-        <el-table-column label="下单时间" width="200" prop="create_time"></el-table-column>
-        <el-table-column label="地址" prop="order_address"></el-table-column>
+        <el-table-column label="下单时间" width="180" prop="create_time"></el-table-column>
+        <el-table-column label="地址" width="200" prop="order_address"></el-table-column>
         <el-table-column label="操作" width="200">
           <template v-slot:default="scope">
             <!-- {{JSON.stringify(scope.row.order_number)}} -->
@@ -211,7 +211,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .listCard {
   margin-top: 15px;
 }
@@ -220,6 +220,9 @@ export default {
 }
 .el-select .el-input {
     width: 130px;
+}
+.el-breadcrumb{
+  margin-bottom: 15px;
 }
 
 

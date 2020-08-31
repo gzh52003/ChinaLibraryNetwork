@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- 面包屑导航 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/user' }">用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>用户添加</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-form
       :model="ruleForm"
       status-icon
@@ -276,10 +282,13 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .el-avatar img{
     display: block;
     // width: 100%;
     height: 100%;
+  }
+  .el-breadcrumb{
+    margin-bottom: 15px;
   }
 </style>

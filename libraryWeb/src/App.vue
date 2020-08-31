@@ -41,9 +41,11 @@
               </template>
               <el-menu-item
                 :key="sub.path"
-                :index="item.path+sub.path"
+                :index="item.path + sub.path"
                 v-for="sub in item.submenu"
-              >{{sub.text}}</el-menu-item>
+              >
+              <i :class="sub.icon" style="color:#fff"></i>
+              {{sub.text}}</el-menu-item>
             </el-submenu>
           </template>
         </el-menu>
@@ -55,13 +57,13 @@
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>-->
-        <el-breadcrumb separator-class="el-icon-arrow-right">
+        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>活动管理</el-breadcrumb-item>
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-        </el-breadcrumb>
-        <div style="padding:15px 0;">
+        </el-breadcrumb> -->
+        <div style="padding:0px 0;">
           <router-view />
         </div>
       </el-main>
@@ -89,11 +91,13 @@ export default {
           submenu: [
             {
               text: "用户列表",
-              path: "/list"
+              path: "/list",
+              icon:"el-icon-menu"
             },
             {
               text: "添加用户",
-              path: "/add"
+              path: "/add",
+              icon:"el-icon-menu"
             },
           ],
         },
