@@ -8,14 +8,17 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Button,Tabbar, TabbarItem,Tag, Image, ImagePreview, Field, Checkbox } from 'vant'
+import {Button,Tabbar, TabbarItem, Tag, Image, ImagePreview, Field, Checkbox, Icon,Grid, GridItem } from 'vant'
 Vue.use(Image);
 Vue.use(Button)
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
 Vue.use(Tag);
 Vue.use(Field);
-Vue.use(Checkbox)
+Vue.use(Checkbox);
+Vue.use(Icon);
+Vue.use(Grid);
+Vue.use(GridItem);
 export default {
   data(){
     return {
@@ -67,20 +70,80 @@ export default {
 }
 </script>
 <style lang="scss">
-.price {
-  del {
-    color: #999;
-    margin-right: 5px;
-    &::before {
-      content: "￥";
-    }
-  }
-  span {
-    color: #f00;
-    &::before {
-      content: "￥";
-    }
-  }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+    line-height: 1;
+    font-family: Microsoft Yahei,Helvetica,Arial;
+    font-size: 12px;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+input{outline: none;} 
+img{
+    vertical-align: top;
+}
+.fl{
+    float:left;
+}
+.fr{
+    float:right;
+}
+.clear_fix::after{
+    content:"";
+    display: block;
+    height:0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+
+
 </style>
 
