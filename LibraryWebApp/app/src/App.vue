@@ -8,12 +8,14 @@
 </template>
 <script>
 import Vue from 'vue'
-import {Button,Tabbar, TabbarItem, Tag, Image, ImagePreview, Field, Checkbox, Icon,Grid, GridItem } from 'vant'
+import {Button,Tabbar, TabbarItem, Tag, Tab,Tabs, Image, ImagePreview, Field, Checkbox, Icon,Grid, GridItem } from 'vant'
 Vue.use(Image);
 Vue.use(Button)
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
 Vue.use(Tag);
+Vue.use(Tab);
+Vue.use(Tabs);
 Vue.use(Field);
 Vue.use(Checkbox);
 Vue.use(Icon);
