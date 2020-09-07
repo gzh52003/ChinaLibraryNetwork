@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/reg',
     name: 'Reg',
-    component:()=>import('../views/Reg.vue')
+    component:()=>import('../views/Regiter.vue')
   }
 ]
 

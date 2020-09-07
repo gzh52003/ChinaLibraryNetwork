@@ -2,7 +2,7 @@
   <div class="information">
     <div>
       <van-nav-bar
-        title="登录"
+        title="注册"
         left-arrow
         @click-left="onClickLeft"
       />
@@ -28,8 +28,8 @@
           <van-button size="small" type="default">发送验证码</van-button>
         </div>
 
-        <van-button color="#666a6b" block class="login">登录</van-button>
-        <van-cell title="" value="新用户注册" class="register" @click="gotoReg()" />
+        <van-button color="#666a6b" block class="login">注册</van-button>
+        <van-cell title="" value="已有账号去登录" class="register" @click="goto()" />
       </div>
     </div>
   </div>
@@ -51,8 +51,8 @@ export default {
     onClickLeft() {
       this.$router.back()
     },
-    gotoReg(){
-      this.$router.push({name:'Reg'})
+    goto(){
+      this.$router.replace({name:'Login'})
     }
   },
   data() {
