@@ -1,0 +1,37 @@
+<template>
+  <!-- vue实例外创建 -->
+  <div>
+    <div v-for="item in goodslist" :key="item._id">
+      <van-card
+        :price="item.sellPrice"
+        :origin-price="item.priceTit"
+        :desc="item.author+' 著 / '+item.publisher"
+        :title="item.title"
+        :thumb="item.url"
+      >
+        <template #tags style="margin-left:2rem;margin-top:2rem">
+          <span class="xingxing">
+            <van-rate v-model="value" allow-half size="0.5rem" />
+          </span>
+
+          <span style="margin-left:2rem;margin-top:5rem;color: #ff511c">
+            <em>88</em>条评论
+          </span>
+        </template>
+        <template #footer>
+          <van-icon name="shopping-cart-o" style="margin-right:1rem" color="#ff511c" size="1rem" />
+          <van-icon name="like-o" size="1rem" />
+        </template>
+      </van-card>
+    </div>
+  </div>
+</template>
+<!-- 调用   <mycom></mycom> -->
+<script>
+Vue.component("itemcom", {
+  props: ["goodslist"],
+});
+export default {
+  name: "itemcom",
+};
+</script>

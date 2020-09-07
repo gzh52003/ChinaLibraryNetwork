@@ -11,9 +11,8 @@ router.get('/',async (req,res)=>{
         // size: 10,
         noise:3,
         ignoreChars: '0o1il',
-        // background:'transparent',
-        // background:'skyblue',
-        // color:true,
+        background:'#58bc58',
+        color:true,
         fontSize:50,
         height:40,
         width:90
