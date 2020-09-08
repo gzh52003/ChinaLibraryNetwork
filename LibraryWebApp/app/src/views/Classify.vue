@@ -1,16 +1,16 @@
 <template>
   <div style="height:100%">
-    <!-- ÂàÜÁ±ªÈ°µ -->
+    <!-- ∑÷¿‡“≥ -->
     <header>
       <van-row>
         <van-col span="8">
           <h1>
-            <img src="images/logo1.png" alt="‰∏≠ÂõΩÂõæ‰π¶ÁΩë" />
+            <img src="images/logo1.png" alt="÷–π˙Õº ÈÕ¯" />
           </h1>
         </van-col>
         <van-col span="13" class="heatitle">
           <van-cell-group>
-            <van-field @focus="searchInput()" class="searchInput" placeholder="Ëá™Âçë‰∏éË∂ÖË∂ä" />
+            <van-field @focus="searchInput()" class="searchInput" placeholder="◊‘±∞”Î≥¨‘Ω" />
           </van-cell-group>
         </van-col>
         <van-col span="3">
@@ -35,7 +35,7 @@
           <p style="padding-right:10px;padding-left:10px;">
             <van-image style="padding-top:10px" src="images/7002631.jpg" />
           </p>
-          <!-- ‰∏§Âº†ÂõæÁâá -->
+          <!-- ¡Ω’≈Õº∆¨ -->
           <van-row style="padding-top:5px;padding-right:10px;padding-left:10px;">
             <van-col span="12">
               <van-image style="margin-right:0.5rem;height:50px" src="images/lei_xsj.png" />
@@ -44,78 +44,78 @@
               <van-image style="height:50px;margin-left:0.5rem;" src="images/lei_cxb.png" />
             </van-col>
           </van-row>
-          <!-- Ê∏≤Êüì -->
+          <!-- ‰÷»æ -->
           <van-grid :border="false" :column-num="3">
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s8078919.jpg" />
-              <span>Âä®Êº´Âç°ÈÄö</span>
+              <span>∂Ø¬˛ø®Õ®</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('gushici')">
               <van-image style="padding-bottom:0.5rem" src="images/s8185635.jpg" />
-              <span>Âè§ËØóËØç</span>
+              <span>π≈ ´¥ </span>
             </van-grid-item>
             <van-grid-item @click="gotolist('shehuikexue')">
               <van-image style="padding-bottom:0.5rem" src="images/s5072978.jpg" />
-              <span>Á§æ‰ºöÁßëÂ≠¶</span>
+              <span>…Áª·ø∆—ß</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('yishulilun')">
               <van-image style="padding-bottom:0.5rem" src="images/s6640927.jpg" />
-              <span>Ëâ∫ÊúØÁêÜËÆ∫</span>
+              <span>“’ ı¿Ì¬€</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('yishulilun')">
               <van-image style="padding-bottom:0.5rem" src="images/s7408987.jpg" />
-              <span>‰∏≠ÂõΩÂΩì‰ª£...</span>
+              <span>÷–π˙µ±¥˙...</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('yishulilun')">
               <van-image style="padding-bottom:0.5rem" src="images/s8236790.jpg" />
-              <span>‰∏≠ÂõΩÂè§ÂÖ∏...</span>
+              <span>÷–π˙π≈µ‰...</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s7474127.jpg" />
-              <span>‰∏≠ÂõΩËøë‰ª£...</span>
+              <span>÷–π˙Ω¸¥˙...</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s8138579.jpg" />
-              <span>Â§ñÂõΩÂ∞èËØ¥...</span>
+              <span>Õ‚π˙–°Àµ...</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s8138212.jpg" />
-              <span>Ë¥¢Áªè</span>
+              <span>≤∆æ≠</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s6788162.jpg" />
-              <span>ÈÉΩÂ∏Ç</span>
+              <span>∂º –</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('dongmankatong')">
               <van-image style="padding-bottom:0.5rem" src="images/s8182384.jpg" />
-              <span>ÂÆòÂú∫</span>
+              <span>πŸ≥°</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('gushici')">
               <van-image style="padding-bottom:0.5rem" src="images/s8138212.jpg" />
-              <span>ÈÉΩÂ∏Ç</span>
+              <span>∂º –</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('gushici')">
               <van-image style="padding-bottom:0.5rem" src="images/s8185976.jpg" />
-              <span>ÈÉΩÂ∏Ç</span>
+              <span>∂º –</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('gushici')">
               <van-image style="padding-bottom:0.5rem" src="images/s8187287.jpg" />
-              <span>ÈÉΩÂ∏Ç</span>
+              <span>∂º –</span>
             </van-grid-item>
             <van-grid-item @click="gotolist('gushici')">
               <van-image style="padding-bottom:0.5rem" src="images/s8185976.jpg" />
-              <span>ÈÉΩÂ∏Ç</span>
+              <span>∂º –</span>
             </van-grid-item>
           </van-grid>
         </div>
         <div v-if="active === 1">
-          <van-empty description="ÊöÇÊó†‰π¶Á±ç" style="padding-top:9rem" />
+          <van-empty description="‘›Œﬁ ÈºÆ" style="padding-top:9rem" />
         </div>
         <div v-if="active === 2">
-          <van-empty description="ÊöÇÊó†‰π¶Á±ç" style="padding-top:9rem" />
+          <van-empty description="‘›Œﬁ ÈºÆ" style="padding-top:9rem" />
         </div>
         <div v-if="active === 3">
-          <van-empty description="ÊöÇÊó†‰π¶Á±ç" style="padding-top:9rem" />
+          <van-empty description="‘›Œﬁ ÈºÆ" style="padding-top:9rem" />
         </div>
       </template>
     </van-tree-select>
@@ -152,10 +152,10 @@ export default {
     return {
       active: 0,
       items: [
-        { text: "ÊñáÂ≠¶" },
-        { text: "Á§æÁßë" },
-        { text: "Â∞ëÂÑø" },
-        { text: "Ëâ∫ÊúØ" },
+        { text: "Œƒ—ß" },
+        { text: "…Áø∆" },
+        { text: "…Ÿ∂˘" },
+        { text: "“’ ı" },
       ],
     };
   },

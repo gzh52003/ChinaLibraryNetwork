@@ -1,33 +1,33 @@
 <template>
   <div class="quanju">
-    <!-- ÂàóË°®È°µ -->
+    <!-- ¡–±Ì“≥ -->
 
-    <!-- Â§¥ÈÉ® -->
+    <!-- Õ∑≤ø -->
     <van-row class="heard">
       <van-col span="2" style="padding-left:10px;padding-top:15px">
         <van-icon name="arrow-left" size="25" color="#323233" @click="gotoclassify" />
       </van-col>
       <van-col span="20">
-        <van-search shape="round" background="#fff" placeholder="ÊâòÈ©¨ÊñØ¬∑Ê≤ÉÂ∞îÂ§´" />
+        <van-search shape="round" background="#fff" placeholder="Õ–¬ÌÀπ°§Œ÷∂˚∑Ú" />
       </van-col>
       <van-col span="2" style="padding-left:0px;padding-top:15px">
         <van-icon name="ellipsis" color="#323233" size="25" />
       </van-col>
     </van-row>
-    <!-- Èù¢ÂåÖÂ±ëÂØºËà™ -->
+    <!-- √Ê∞¸–ºµº∫Ω -->
     <p class="bread">
-      <span style="margin-right:15px">ÊñáÂ≠¶</span>
+      <span style="margin-right:15px">Œƒ—ß</span>
       <em style="margin-right:15px">></em>
-      <i>‰∏≠ÂõΩÂΩì‰ª£Â∞èËØ¥</i>
+      <i>÷–π˙µ±¥˙–°Àµ</i>
     </p>
-    <!-- ÂàÜÁ±ªÊéíÂ∫è -->
+    <!-- ∑÷¿‡≈≈–Ú -->
     <van-tabs>
-      <van-tab title="ÈªòËÆ§">
+      <van-tab title="ƒ¨»œ">
         <div v-for="item in goodslist" :key="item._id" @click="gotogoods(item._id)">
           <van-card
             :price="item.sellPrice"
             :origin-price="item.priceTit"
-            :desc="item.author+' Ëëó / '+item.publisher"
+            :desc="item.author+' ÷¯ / '+item.publisher"
             :title="item.title"
             :thumb="item.url"
           >
@@ -37,7 +37,7 @@
               </span>
 
               <span style="margin-left:2rem;margin-top:5rem;color: #ff511c">
-                <em>88</em>Êù°ËØÑËÆ∫
+                <em>88</em>Ãı∆¿¬€
               </span>
             </template>
             <template #footer>
@@ -52,32 +52,32 @@
           </van-card>
         </div>
       </van-tab>
-      <van-tab title="‰ª∑Ê†º" @click="paixu('sellPrice')" style="height:100%">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="º€∏Ò" @click="paixu('sellPrice')" style="height:100%">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="ÊäòÊâ£">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="’€ø€">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="Âá∫ÁâàÊó∂Èó¥">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="≥ˆ∞Ê ±º‰">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="ÈîÄÈáè">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="œ˙¡ø">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="‰∏äÊû∂Êó∂Èó¥">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="…œº‹ ±º‰">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="ÈîÄÈáè">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="œ˙¡ø">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="‰∏äÊû∂Êó∂Èó¥">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="…œº‹ ±º‰">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="ÈîÄÈáè">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="œ˙¡ø">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
-      <van-tab title="‰∏äÊû∂Êó∂Èó¥">
-        <van-empty description="ÊöÇÊó†‰π¶Á±ç" size="20rem" />
+      <van-tab title="…œº‹ ±º‰">
+        <van-empty description="‘›Œﬁ ÈºÆ" size="20rem" />
       </van-tab>
     </van-tabs>
   </div>
@@ -126,7 +126,7 @@ export default {
     const { booktype } = this.$route.params;
     this.booktype = booktype;
     // console.log(booktype);
-    // ÂàóË°®Êï∞ÊçÆ
+    // ¡–±Ì ˝æ›
     const data = await this.$request.get("/goods/all", {
       params: { booktype },
     });
@@ -134,7 +134,7 @@ export default {
     // console.log(this.goodslist);
   },
   mounted() {
-    // ÊéßÂà∂ËèúÂçïÊòæÁ§∫
+    // øÿ÷∆≤Àµ•œ‘ æ
     this.$store.commit("displayTabbar", false);
   },
   destroyed() {
