@@ -33,7 +33,7 @@
         </p>
         <p class="author">
           <em>作者： {{data.author}} 著</em>
-          <van-icon name="shopping-cart-o" @click="goto('/cart')" />
+          <van-icon name="shopping-cart-o" @click="add2cart" />
         </p>
         <p class="publisher">出版社： {{data.publisher}}</p>
         <p class="wenxintishi">温馨提示：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8.9成新、切口有划线标记、光盘等附件不全</p>
@@ -146,15 +146,26 @@ export default {
       // 存在：数量+1
       // 不存在：添加到购物车
       const { _id } = this.data;
-      const current = this.cartlist.filter((item) => item._id === _id)[0];
+      // console.log(_id);
+      // // debugger;
+      // console.log(this.$store.state.cart.cartList);
+      
+      const current = this.$store.state.cart.cartList.filter((item) => item._id === _id);
       if (current) {
         this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
       } else {
+        // async postCartAsync(content){
+        //     const {data} = await request.post("/cart")
+        //     content.commit('postCart',data)
+        //     // console.log("data=", data);
+        // }
         const goods = {
           ...this.data,
           qty: 1,
         };
+        // console.log(1);
         // 调用mutation方法
+        // postCartAsync(content);
         this.$store.commit("add", goods);
       }
     },
@@ -163,6 +174,11 @@ export default {
       this.add2cart();
       this.$router.push("/cart");
     },
+    // async postCartAsync(content){
+    //         const {data} = await request.post("/cart")
+    //         content.commit('postCart',data)
+    //         // console.log("data=", data);
+    // },
   },
   computed: {
     cartlist() {
@@ -172,7 +188,7 @@ export default {
   },
   async created() {
     let result = this.$route.params;
-    // console.log("result", result);
+    console.log("result", result);
     this.booktype = result.booktype;
     let id = result.id;
     // console.log("从list传过来的id", id);
@@ -307,7 +323,7 @@ export default {
     font-weight: bold;
   }
 }
-goodslist {
+.goodslist {
   h4 {
     font-size: 14px;
   }
