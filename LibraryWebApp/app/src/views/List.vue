@@ -5,7 +5,7 @@
     <!-- 头部 -->
     <van-row class="heard">
       <van-col span="2" style="padding-left:10px;padding-top:15px">
-        <van-icon name="arrow-left" size="25" color="#323233" />
+        <van-icon name="arrow-left" size="25" color="#323233" @click="gotoclassify" />
       </van-col>
       <van-col span="20">
         <van-search shape="round" background="#fff" placeholder="托马斯·沃尔夫" />
@@ -52,15 +52,33 @@
           </van-card>
         </div>
       </van-tab>
-      <van-tab title="价格" @click="paixu('sellPrice')"></van-tab>
-      <van-tab title="折扣">内容 3</van-tab>
-      <van-tab title="出版时间">内容 3</van-tab>
-      <van-tab title="销量">内容 3</van-tab>
-      <van-tab title="上架时间">内容 3</van-tab>
-      <van-tab title="销量">内容 3</van-tab>
-      <van-tab title="上架时间">内容 3</van-tab>
-      <van-tab title="销量">内容 3</van-tab>
-      <van-tab title="上架时间">内容 3</van-tab>
+      <van-tab title="价格" @click="paixu('sellPrice')" style="height:100%">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="折扣">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="出版时间">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="销量">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="上架时间">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="销量">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="上架时间">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="销量">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
+      <van-tab title="上架时间">
+        <van-empty description="暂无书籍" size="20rem" />
+      </van-tab>
     </van-tabs>
   </div>
 </template>
@@ -87,9 +105,13 @@ export default {
     };
   },
   methods: {
+    gotoclassify() {
+      this.$router.push({
+        name: "Classify",
+      });
+    },
     gotogoods(id) {
       let booktype = this.booktype;
-      // console.log("返回good的book", booktype);
       this.$router.push({
         name: "Goods",
         params: {
@@ -121,6 +143,9 @@ export default {
 };
 </script>
 <style lang="scss" scope>
+#app {
+  background-color: #fff;
+}
 .quanju {
   background-color: #fff;
 }

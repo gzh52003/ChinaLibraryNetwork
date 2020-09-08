@@ -11,6 +11,7 @@ const common = {
     mutations: {
         //让下边栏隐藏，payload为布尔值，看传过来的是什么
         displayTabbar(state, payload) {
+
             state.showTabbar = payload;
         }
     },

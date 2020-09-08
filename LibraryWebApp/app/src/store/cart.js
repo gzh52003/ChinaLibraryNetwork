@@ -7,21 +7,7 @@ const cart = {
     // namespaced:true,
     // 共享的数据：类似组件中的data
     state: {
-        goodslist: [{
-            _id: "5f3f986fa2711242f8100ab3",
-            goods_id: "25572",
-            goods_name:
-                "瑞士艺术制表大师 爱宝时（EPOS）-Ladies女士系列 心跳时光 4314.133.20.50.10 机械女表",
-            big_img_url: "/img/80b6a4d2175c4028999e3e2eab242d3f_big.jpg",
-            category: "女士表",
-            sales_price: "580",
-            price: "6960",
-            sales_qty: 968.0,
-            img_url: "/img/80b6a4d2175c4028999e3e2eab242d3f.jpg",
-            qty: 1,
-            checked: false,
-        }
-        ]
+        goodslist: [],
     },
     getters: {
         // 想拿到common.js下的showTabbar
@@ -45,6 +31,7 @@ const cart = {
         // 添加商品到购物车
         add(state, goods) {
             state.goodslist.unshift(goods)
+            console.log('state.goodslist', state.goodslist);
             console.log('add to cart', goods)
         },
 

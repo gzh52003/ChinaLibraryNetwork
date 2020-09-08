@@ -4,11 +4,17 @@
     <header class="header">
       <van-row>
         <van-col span="4">
-          <van-icon name="arrow-left" />
+          <van-icon name="arrow-left" @click="backlist" />
         </van-col>
-        <van-col span="4" size="25">图书</van-col>
-        <van-col span="4">评论</van-col>
-        <van-col span="4">详情</van-col>
+        <van-col span="4" size="25" @click="toTop('0')" class="diaji">
+          <em>图书</em>
+        </van-col>
+        <van-col span="4" @click="toTop('230')" class="diaji">
+          <em>详情</em>
+        </van-col>
+        <van-col span="4" @click="toTop('530')" class="diaji">
+          <em>推荐</em>
+        </van-col>
         <van-col span="4">
           <van-icon name="replay" />
         </van-col>
@@ -33,7 +39,8 @@
         </p>
         <p class="author">
           <em>作者： {{data.author}} 著</em>
-          <van-icon name="shopping-cart-o" @click="goto('/cart')" />
+          <!-- //购物车 -->
+          <van-icon name="shopping-cart-o" @click="buyNow(data._id)" />
         </p>
         <p class="publisher">出版社： {{data.publisher}}</p>
         <p class="wenxintishi">温馨提示：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8.9成新、切口有划线标记、光盘等附件不全</p>
@@ -41,8 +48,8 @@
       </div>
       <h3>本类五星书</h3>
       <van-grid :border="false" :column-num="3" class="goodslist">
-        <van-grid-item v-for="item in recommend" :key="item._id" @click="gotoDetail(item._id)">
-          <van-image :src="item.url" style="height:6rem" />
+        <van-grid-item v-for="item in recommend" :key="item._id" @click="toTop('0')">
+          <van-image :src="item.url" style="height:6rem" @click="gotoDetail(item._id)" />
           <h4 style="padding-top:0.5rem">{{item.title}}</h4>
           <p class="price" style="padding-top:0.5rem">
             <span style="color:#e60000">￥{{item.priceTit}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,19 +57,6 @@
           </p>
         </van-grid-item>
       </van-grid>
-
-      <!--       <van-goods-action>
-        <van-goods-action-icon icon="chat-o" text="客服" color="#07c160" />
-        <van-goods-action-icon
-          icon="cart-o"
-          text="购物车"
-          :badge="cartlist.length"
-          @click="goto('/cart')"
-        />
-        <van-goods-action-icon icon="star" text="已收藏" color="#ff5000" />
-        <van-goods-action-button type="warning" text="加入购物车" @click="add2cart" />
-        <van-goods-action-button type="danger" text="立即购买" @click="buyNow" />
-      </van-goods-action>-->
     </main>
   </div>
 </template>
@@ -91,27 +85,43 @@ export default {
       data: {},
       booktype: "",
       recommend: [],
+      goods: "",
     };
   },
   methods: {
     //跳回上一页
-    /*     backlist() {
-      let book = this.booktype;
+    backlist() {
       // this.$router.push(`/goods/${id}`)
-      this.$router.back(`/list/${book}`);
-      console.log(22222);
-    }, */
+      let booktype = this.booktype;
+      this.$router.push({
+        name: "List",
+        params: {
+          booktype,
+        },
+      });
+    },
+    //滚动条高度
+    toTop(num) {
+      window.scrollTo({
+        top: num * 1,
+        behavior: "smooth", // 表示平滑的滚动
+      });
+      // border-bottom: 0.3rem solid #e60000;
+    },
     goto(path) {
       this.$router.push(path);
     },
     gotoDetail(id) {
-      this.goto({
+      let booktype = this.booktype;
+      this.$router.push({
         name: "Goods",
         params: {
           id,
+          booktype,
         },
       });
     },
+
     showBig() {
       console.log(this.data.url);
       ImagePreview({
@@ -145,8 +155,13 @@ export default {
       // 判断当前商品是否已经存在购物车中
       // 存在：数量+1
       // 不存在：添加到购物车
+      console.log("this.data=", this.data);
       const { _id } = this.data;
+      console.log(_id);
+      console.log("this.cartlist", this.cartlist);
+      debugger;
       const current = this.cartlist.filter((item) => item._id === _id)[0];
+      console.log("current", current);
       if (current) {
         this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
       } else {
@@ -154,11 +169,17 @@ export default {
           ...this.data,
           qty: 1,
         };
+        this.goods = goods;
         // 调用mutation方法
         this.$store.commit("add", goods);
       }
     },
-    buyNow() {
+    buyNow(id) {
+      let goods = this.goods;
+      this.$store.commit("add", goods);
+      // .goodslist.unshift(goods)
+      console.log("goodsid", id);
+
       // 添加当前商品到购物车，并跳转到购物车页面
       this.add2cart();
       this.$router.push("/cart");
@@ -172,22 +193,24 @@ export default {
   },
   async created() {
     let result = this.$route.params;
-    // console.log("result", result);
+    console.log("result", result);
     this.booktype = result.booktype;
     let id = result.id;
-    // console.log("从list传过来的id", id);
-    // console.log("this.booktype", this.booktype);
     this.getData(id);
     this.getRecommend();
+    // this.toTop();
+
+    // this.$store.commit("displayTabbar", true);
   },
   mounted() {
     // 控制下菜单显示
     // this.$parent.showMenu = false;
     // console.log('goods.created',this.$parent.showMenu)
-    this.$store.commit("displayTabbar", false);
+    // this.$store.commit("displayTabbar", false);
   },
   destroyed() {
-    this.$store.commit("displayTabbar", true);
+    // this.$parent.showMenu = true;
+    // this.$store.commit("displayTabbar", true);
   },
   beforeRouteUpdate(to, from, next) {
     console.log(to.params.id, from.params.id);
@@ -220,6 +243,12 @@ export default {
   padding-left: 1.5rem;
   // margin-left: 0.5rem;
   // background-color: aqua;
+}
+.diaji:hover em {
+  padding-bottom: 0.3rem;
+}
+.diaji:hover em {
+  border-bottom: 0.3rem solid #e60000;
 }
 .goods-info {
   padding: 15px;
