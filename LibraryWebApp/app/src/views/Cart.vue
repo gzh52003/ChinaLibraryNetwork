@@ -3,7 +3,7 @@
     <div class="cartWrap">
       <!-- 头部 -->
       <div class="cartHead">
-        <van-nav-bar title="购物车" left-text="" left-arrow>
+        <van-nav-bar title="购物车" left-text="" left-arrow  @click-left="onClickLeft">
           <template #right>
             <div class="editBtn" id="editBtn">编辑</div>
             <van-icon name="ellipsis" size="25" />
@@ -64,9 +64,6 @@
     <!-- 订单结算 -->
     <van-submit-bar :price="totalPrice" button-text="提交订单" @submit="onSubmit">
       <van-checkbox v-model="checkAll">全选</van-checkbox>
-      <template #tip>
-        你的收货地址不支持同城送, <span >修改地址</span>
-      </template>
     </van-submit-bar>
     </div>
   </div>
@@ -98,6 +95,9 @@ export default {
   //     Toast('按钮');
   //   },
   methods:{
+    onClickLeft(){
+      this.$router.push('/home');
+    },
     onSubmit(){
       
     },
@@ -133,11 +133,10 @@ export default {
 
       // 映射模块化后的数据
      cartList(state){
-        console.log('mapState=',state)
+        // console.log('mapState=',state)
         return state.cart.cartList
       }
     }),
-
 
 
     checkAll:{
@@ -149,6 +148,7 @@ export default {
           item.checked = val;
           return item;
         });
+        // console.log(this.cartList)
       }
     },
 
@@ -177,6 +177,7 @@ export default {
 <style lang="scss" scoped>
 .cartWrap{
   background: #f3f3f3;
+  padding-bottom: 80px;
   // padding: 0.88rem 0 1rem !important;
 }
 /* 头部 */
@@ -193,9 +194,9 @@ export default {
 }
 
 /* 购物车列表 */
-
-
-
+.van-submit-bar{
+  padding-bottom:20px;
+}
 
 .price {
   font-size:.95rem;
