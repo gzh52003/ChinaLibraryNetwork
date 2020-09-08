@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 //引入store模块
 import cart from './cart'
 import common from './common'
+import Login from './Login'
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ const store = new Vuex.Store({
     modules: {
         cart,
         common,
+		Login
     }
 })
 
