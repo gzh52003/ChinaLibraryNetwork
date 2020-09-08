@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div style="height:100%">
     <!-- 分类页 -->
     <header>
@@ -246,3 +247,12 @@ header {
   resize: none;
 }
 </style>
+=======
+  <div>
+    Classify
+  </div>
+</template>
+<script>
+
+</script>
+>>>>>>> c64e7f61e861b8e029b3d6daeee1390ff4d1f983

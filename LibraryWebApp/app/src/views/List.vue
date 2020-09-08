@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="quanju">
     <!-- 列表页 -->
 
@@ -80,21 +81,15 @@
         <van-empty description="暂无书籍" size="20rem" />
       </van-tab>
     </van-tabs>
+=======
+  <div>
+    List
+>>>>>>> c64e7f61e861b8e029b3d6daeee1390ff4d1f983
   </div>
 </template>
 <script>
-import Vue from "vue";
-import { NavBar, Icon, Search, Tab, Tabs, Button, Card, Rate } from "vant";
-Vue.use(Tab);
-Vue.use(Tabs);
-Vue.use(Card);
-Vue.use(Button);
-Vue.use(Search);
-Vue.use(Icon);
-Vue.use(NavBar);
-Vue.use(Rate);
-
 export default {
+<<<<<<< HEAD
   name: "List",
   data() {
     return {
@@ -148,42 +143,8 @@ export default {
 }
 .quanju {
   background-color: #fff;
+=======
+  name:'List'
+>>>>>>> c64e7f61e861b8e029b3d6daeee1390ff4d1f983
 }
-.bread {
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-bottom: 15px;
-  font-size: 0.5rem;
-  border-bottom: 1px solid #ccc;
-}
-.van-tabs {
-  border-bottom: 0.02rem solid #f3f3f3;
-}
-.van-field__left-icon .van-icon {
-  font-size: 20px;
-}
-.van-field__body .van-field__control {
-  font-size: 18px;
-}
-.heard {
-  box-shadow: 0 0 10px #d4d2d3;
-}
-.listbtns {
-  display: flex;
-  justify-content: space-around;
-}
-.tejia {
-  background-color: #fff;
-  color: #000;
-  width: 6rem;
-}
-.listbtn {
-  width: 5rem;
-  color: #000;
-  border-radius: 0.5rem;
-}
-.xingxing {
-  margin-right: 0.5rem;
-  padding-top: 1rem;
-}
-</style>
+</script>

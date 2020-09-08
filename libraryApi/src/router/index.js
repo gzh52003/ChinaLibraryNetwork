@@ -20,6 +20,7 @@ const uploadRouter = require('./upload');
 const orderRouter = require('./order');
 const expressRouter = require('./express');
 const changeAddressRouter = require('./changeAddress');
+const cartRouter = require('./cart');
 const { formatData } = require('../utils/tools');
 const userinfoRouter = require('./userinfo/user');
 //发送邮箱
@@ -91,6 +92,7 @@ router.use('/express',expressRouter);
 
 router.use('/changeAddress',changeAddressRouter);
 
+router.use('/cart',cartRouter);
 
 // 验证码
 router.use('/vcode', vcodeRouter);
