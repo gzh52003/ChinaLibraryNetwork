@@ -4,7 +4,8 @@
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" :rules="rules" ref="formLabelAlign">
             <el-form-item>
                 <!-- <div class="demo-type"> -->
-                    <el-avatar :size="100" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar>
+                    <!-- <el-avatar :size="100" src="../../public/images/login_bg.jpg"></el-avatar> -->
+                    <img src="../../public/images/login_bg.jpg" width=100 height=100/>
                 <!-- </div> -->
             </el-form-item>
             <el-form-item label="UserName" prop="username">
@@ -16,7 +17,7 @@
             <el-form-item class="Vcode-item" label="Vcode" prop="vcode">
                 <el-input type="text" v-model="formLabelAlign.vcode"></el-input>
                 <div class="vcode" @click="getVcode" id="Vcode">
-                    <img src="http://localhost:2003/uploads/avatar-1598079578699.jpg" alt="">
+                    <img src="../../public/images/login_bg.jpg" >
                     <span class="vcode-span">获取验证码</span>
                 </div>
             </el-form-item>

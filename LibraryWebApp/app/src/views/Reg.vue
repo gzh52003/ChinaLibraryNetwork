@@ -64,15 +64,15 @@ export default {
     async getVcode(){
       //点击获取验证码
       const {data} = await this.$request.get("/vcode");
-      console.log(data);
+      //console.log(data);
       if(data.code === 1){
-          console.log(1);
+          //console.log(1);
           document.querySelector("#Vcode").innerHTML = data.data
       } 
     },
     async submitForm() {
             // this.$refs["formLabelAlign"].validate(async (valid) => {
-                // console.log(valid);
+                // //console.log(valid);
                 // valid为校验结果，全部校验通过是值为true,否则为false
                 // if (valid) {
                     let params = {
@@ -91,18 +91,18 @@ export default {
                     }
 
                 // } else {
-                // console.log("error submit!!");
+                // //console.log("error submit!!");
                 // return false;
                 // }
             // });
         },
         onFailed(errorInfo) {
-          console.log('failed', errorInfo);
+          //console.log('failed', errorInfo);
         },
        async checkUsername(value, messges){
       
             var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
-            console.log("打印一下",value, messges);
+            //console.log("打印一下",value, messges);
             if (!patrn.exec(value)){
                 return false;
             }
@@ -128,7 +128,7 @@ export default {
                 }
                 
         },async checkCode(rule, value, callback){
-            console.log(value);
+            //console.log(value);
             if(value.length > 3){
                 const {data} = await this.$request.get("/vcode/checkCode",
                 {params:{"vcode":value}});
@@ -143,7 +143,7 @@ export default {
   },
   data() {
     // const checkUsername = async (rule, value, callback) => {
-    //   console.log("打印一下");
+    //   //console.log("打印一下");
 
     //         var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
     //         if (!patrn.exec(value)){
@@ -172,7 +172,7 @@ export default {
                 
     //     };
     //     const checkCode = async (rule, value, callback) => {
-    //         console.log(value);
+    //         //console.log(value);
     //         if(value.length > 3){
     //             const {data} = await this.$request.get("/vcode/checkCode",
     //             {params:{"vcode":value}});

@@ -62,9 +62,9 @@ export default {
     async getVcode(){
       //点击获取验证码
       const {data} = await this.$request.get("/vcode");
-      console.log(data);
+      // //console.log(data);
       if(data.code === 1){
-          console.log(1);
+          //console.log(1);
           document.querySelector("#Vcode").innerHTML = data.data
       } 
     },
@@ -74,9 +74,9 @@ export default {
         password:this.password,
         vcode:this.vcode
       }
-      console.log(params);
+      //console.log(params);
       const {data} = await this.$request.get(`/login`,{params});
-      console.log(data.data);
+      //console.log(data.data);
       if(data.code != 1){
           Toast('登录失败');
       }else{

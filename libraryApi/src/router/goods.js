@@ -98,6 +98,34 @@ router.get('/book', async (req, res) => {
     }
 })
 
+router.get('/search', async (req, res) => {
+    let { page = 1, size, sort = "add_time", value } = req.query;
+    const skip = (page - 1) * size; //0
+    const limit = size * 1; //10  
+    let obj = {};
+    console.log("value", value);
+    value ? obj["title"] = value : "";
+    // 处理排序参数
+    sort = sort.split(',');// ['price'],['price','-1']
+    // 查询所有商品
+    const result = await mongo.find('shehuikexue', obj, { skip, sort, limit })
+    console.log("obj", obj);
+    console.log("result", result);
+    res.send(result);
+})
+
+
+router.get('/:id/kucun',async (req,res)=>{
+    const {id} = req.params;
+    try {
+        const result = await mongo.find("cart", { _id: id })
+        res.send(formatData({ data: result[0] }))
+
+    } catch (err) {
+        res.send(formatData({ code: 0 }));
+    }
+})
+
 
 
 

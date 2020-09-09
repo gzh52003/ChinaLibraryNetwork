@@ -123,7 +123,7 @@ export default {
     },
 
     showBig() {
-      console.log(this.data.url);
+      //console.log(this.data.url);
       ImagePreview({
         images: [this.data.url],
         closeable: true,
@@ -148,35 +148,29 @@ export default {
         },
       });
       this.recommend = recommend;
-      console.log(this.recommend);
+      //console.log(this.recommend);
     },
     add2cart() {
       // 添加当前商品到购物车;
       // 判断当前商品是否已经存在购物车中
       // 存在：数量+1
       // 不存在：添加到购物车
-      console.log("this.data=", this.data);
+      //console.log("this.data=", this.data);
       const { _id } = this.data;
-      console.log(_id);
-      console.log("this.cartlist", this.cartlist);
+      //console.log(_id);
+      //console.log("this.cartlist", this.cartlist);
       debugger;
       const current = this.cartlist.filter((item) => item._id === _id)[0];
-      console.log("current", current);
+      //console.log("current", current);
       if (current) {
         this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
       } else {
-        // async postCartAsync(content){
-        //     const {data} = await request.post("/cart")
-        //     content.commit('postCart',data)
-        //     // console.log("data=", data);
-        // }
         const goods = {
           ...this.data,
           qty: 1,
         };
         this.goods = goods;
         // 调用mutation方法
-        // postCartAsync(content);
         this.$store.commit("add", goods);
       }
     },
@@ -184,17 +178,12 @@ export default {
       let goods = this.goods;
       this.$store.commit("add", goods);
       // .goodslist.unshift(goods)
-      console.log("goodsid", id);
+      //console.log("goodsid", id);
 
       // 添加当前商品到购物车，并跳转到购物车页面
       this.add2cart();
       this.$router.push("/cart");
     },
-    // async postCartAsync(content){
-    //         const {data} = await request.post("/cart")
-    //         content.commit('postCart',data)
-    //         // console.log("data=", data);
-    // },
   },
   computed: {
     cartlist() {
@@ -204,7 +193,7 @@ export default {
   },
   async created() {
     let result = this.$route.params;
-    console.log("result", result);
+    //console.log("result", result);
     this.booktype = result.booktype;
     let id = result.id;
     this.getData(id);
@@ -216,7 +205,7 @@ export default {
   mounted() {
     // 控制下菜单显示
     // this.$parent.showMenu = false;
-    // console.log('goods.created',this.$parent.showMenu)
+    // //console.log('goods.created',this.$parent.showMenu)
     // this.$store.commit("displayTabbar", false);
   },
   destroyed() {
@@ -224,7 +213,7 @@ export default {
     // this.$store.commit("displayTabbar", true);
   },
   beforeRouteUpdate(to, from, next) {
-    console.log(to.params.id, from.params.id);
+    //console.log(to.params.id, from.params.id);
     if (to.params.id !== from.params.id) {
       this.getData(to.params.id);
       this.getRecommend();
@@ -347,7 +336,7 @@ export default {
     font-weight: bold;
   }
 }
-.goodslist {
+goodslist {
   h4 {
     font-size: 14px;
   }

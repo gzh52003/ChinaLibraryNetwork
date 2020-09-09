@@ -31,7 +31,7 @@ const cart = {
         // // 添加商品到购物车
         add(state,goods){
             state.cartList.unshift(goods)
-            console.log('add to cart',goods)
+            // console.log('add to cart',goods)
         },
 
         // 修改数量
@@ -43,7 +43,7 @@ const cart = {
                 return item;
             });
 
-            console.log(state.cartList)
+            // console.log(state.cartList)
         },
 
         // 删除商品
@@ -88,7 +88,7 @@ const cart = {
         async removeCartAsync(content,{_id}){
             const {data} = await request.delete(`./cart/${id}`)
             content.commit('removeCart',data)
-            console.log('removeCart=',data)
+            // console.log('removeCart=',data)
         }
     }
 }

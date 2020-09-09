@@ -10,7 +10,7 @@ Vue.use(ElementUI);
 
 // 通过原型链共享ajax请求的方法
 Vue.prototype.$request = request
-Vue.prototype.$baseurl = "http://localhost:2003";
+Vue.prototype.$baseurl = "http://120.24.89.48:2005";
 new Vue({
   // 把router注入Vue实例
   router,

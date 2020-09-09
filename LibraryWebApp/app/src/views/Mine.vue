@@ -91,10 +91,10 @@ Vue.use(Field)
 export default {
   methods: {
     onClickLeft() {
-      console.log("返回");
+      //console.log("返回");
     },
     goto(){
-      console.log("退出登录");
+      //console.log("退出登录");
       this.$router.replace({name:'Login'});
       this.$store.commit('initUserinfo',{});
       // this.
@@ -116,6 +116,7 @@ body,
 .information {
   background: #f7f8fa;
   height: 100%;
+  padding-bottom:80px;
 }
 .personal-center {
   padding: 0;

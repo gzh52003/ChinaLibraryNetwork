@@ -125,13 +125,13 @@ export default {
   async created() {
     const { booktype } = this.$route.params;
     this.booktype = booktype;
-    // console.log(booktype);
+    // //console.log(booktype);
     // 列表数据
     const data = await this.$request.get("/goods/all", {
       params: { booktype },
     });
     this.goodslist = data.data;
-    // console.log(this.goodslist);
+    // //console.log(this.goodslist);
   },
   mounted() {
     // 控制菜单显示

@@ -1,4 +1,4 @@
-
+const whiteList = ['http://localhost:8080','http://localhost:8081','http://120.24.89.48:2004','http://120.24.89.48:2006']
 function cors(req,res,next){
     // 设置响应头
     // Access-Control-Allow-Origin

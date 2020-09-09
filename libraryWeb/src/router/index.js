@@ -32,6 +32,7 @@ import $request from '../utils/request'
 Vue.use(VueRouter)
 // 3. 实例化并配置参数
 const router = new VueRouter({
+    mode:"history",
     // mode:'history', // 一般上线后改为history路由(需要额外配置服务器)
     routes: [
 

@@ -13,7 +13,7 @@ const store = new Vuex.Store({
     modules:{
         common,
         cart,
-	Login
+	    Login
     }
 })
 

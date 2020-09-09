@@ -9,7 +9,8 @@
           <span>中国图书网后台管理系统</span>
         </el-col>
         <el-col :span="12" style="text-align:right;height: 60px;">
-          <el-avatar :size="50" style="vertical-align: top;margin-top:5px;margin-right:10px" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar>
+          <!-- <el-avatar :size="50" style="vertical-align: top;margin-top:5px;margin-right:10px" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar> -->
+          <img src="../public/images/login_bg.jpg" style="vertical-align: top;margin-top:5px;margin-right:10px" width=50 height=50/>
           <span style="font-size: 16px;margin-right: 20px;vertical-align: bottom;display: inline-block;height: 42px;">管理员-老李</span>
           <el-button style="vertical-align: bottom;" class="cancella" type="text" @click="cancellation" >注销</el-button>
         </el-col>

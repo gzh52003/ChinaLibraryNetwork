@@ -133,7 +133,7 @@ export default {
 
       // 映射模块化后的数据
      cartList(state){
-        // console.log('mapState=',state)
+        // //console.log('mapState=',state)
         return state.cart.cartList
       }
     }),
@@ -148,7 +148,7 @@ export default {
           item.checked = val;
           return item;
         });
-        // console.log(this.cartList)
+        // //console.log(this.cartList)
       }
     },
 
@@ -167,7 +167,7 @@ export default {
   },
   beforeDestroy(){
     // this.$parent.showMenu = true;
-    //  console.log('cart.destroyed',this.$parent.showMenu)
+    //  //console.log('cart.destroyed',this.$parent.showMenu)
     this.$store.commit('displayTabbar',true);
   }
 

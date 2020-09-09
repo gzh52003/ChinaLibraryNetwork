@@ -685,7 +685,7 @@ export default {
         params:{booktype}
       });
       this.data = data;
-      // console.log("data=", data);
+      //console.log("data=", data);
     },
     toTop(){
       window.scrollTo({
@@ -704,8 +704,8 @@ export default {
         }
       })
     },
-    async searchInput(){
-      // console.log(this.value);
+    searchInput(){
+       //console.log(this.value);
         // const { data:res } = await this.$request.get("/goods/search",{
         //   params:{["value"]:this.value}
         // });
