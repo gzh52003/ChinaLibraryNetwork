@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import request from '../utils/request'
 
 Vue.use(VueRouter)
 const routes = [
@@ -42,10 +41,7 @@ const routes = [
   {
     path: '/mine',
     name: 'Mine',
-    component:()=>import('../views/Mine.vue'),
-    meta: {
-      requireAuth: true
-    }
+    component: () => import('../views/Mine.vue')
   },
   {
     path: '/search',
@@ -68,5 +64,5 @@ const router = new VueRouter({
   // mode:"history",
   routes
 })
-export default router
 
+export default router
