@@ -6,8 +6,8 @@ import request from '../utils/request'
 Vue.use(VueRouter)
 const routes = [
   {
-    path: '/',
-    redirect: { name: 'Home' }
+    path:'/',
+    redirect:{name:'Home'}
   },
   {
     path: '/home',
@@ -17,27 +17,27 @@ const routes = [
   {
     path: '/list',
     name: 'List',
-    component: () => import('../views/List.vue')
+    component:()=>import('../views/List.vue')
   },
   {
     path: '/goods/:id',
     name: 'Goods',
-    component: () => import('../views/Goods.vue')
+    component:()=>import('../views/Goods.vue')
   },
   {
     path: '/classify',
     name: 'Classify',
-    component: () => import('../views/Classify.vue')
+    component:()=>import('../views/Classify.vue')
   },
   {
     path: '/service',
     name: 'Service',
-    component: () => import('../views/Service.vue')
+    component:()=>import('../views/Service.vue')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import('../views/Cart.vue')
+    component:()=>import('../views/Cart.vue')
   },
   {
     path: '/mine',
@@ -48,14 +48,19 @@ const routes = [
     }
   },
   {
+    path: '/search',
+    name: 'Search',
+    component:()=>import('../views/Search.vue')
+  },
+  {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component:()=>import('../views/Login.vue')
   },
   {
     path: '/reg',
     name: 'Reg',
-    component: () => import('../views/Reg.vue')
+    component:()=>import('../views/Reg.vue')
   }
 ]
 

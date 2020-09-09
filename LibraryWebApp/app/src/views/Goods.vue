@@ -154,12 +154,18 @@ export default {
       if (current) {
         this.$store.commit("changeQty", { _id, qty: current.qty + 1 });
       } else {
+        // async postCartAsync(content){
+        //     const {data} = await request.post("/cart")
+        //     content.commit('postCart',data)
+        //     // console.log("data=", data);
+        // }
         const goods = {
           ...this.data,
           qty: 1,
         };
         // console.log(1);
         // 调用mutation方法
+        // postCartAsync(content);
         this.$store.commit("add", goods);
       }
     },
@@ -168,6 +174,11 @@ export default {
       this.add2cart();
       this.$router.push("/cart");
     },
+    // async postCartAsync(content){
+    //         const {data} = await request.post("/cart")
+    //         content.commit('postCart',data)
+    //         // console.log("data=", data);
+    // },
   },
   computed: {
     cartlist() {
@@ -312,7 +323,7 @@ export default {
     font-weight: bold;
   }
 }
-goodslist {
+.goodslist {
   h4 {
     font-size: 14px;
   }
