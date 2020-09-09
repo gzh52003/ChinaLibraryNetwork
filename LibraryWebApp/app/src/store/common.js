@@ -1,4 +1,4 @@
-// È«¾ÖÅäÖÃ
+// å…¨å±€é…ç½®
 const common = {
     state: {
         showTabbar: true
@@ -9,7 +9,7 @@ const common = {
         }
     },
     mutations: {
-        //ÈÃÏÂ±ßÀ¸Òş²Ø£¬payloadÎª²¼¶ûÖµ£¬¿´´«¹ıÀ´µÄÊÇÊ²Ã´
+        //è®©ä¸‹è¾¹æ éšè—ï¼Œpayloadä¸ºå¸ƒå°”å€¼ï¼Œçœ‹ä¼ è¿‡æ¥çš„æ˜¯ä»€ä¹ˆ
         displayTabbar(state, payload) {
 
             state.showTabbar = payload;
