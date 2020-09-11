@@ -4,7 +4,8 @@
             <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign" :rules="rules" ref="formLabelAlign">
             <el-form-item>
                 <!-- <div class="demo-type"> -->
-                    <el-avatar :size="100" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar>
+                    <el-avatar :size="100">
+                    <img src="../../public/images/avatar4.jpg" alt="头像"></el-avatar>
                 <!-- </div> -->
             </el-form-item>
             <el-form-item label="UserName" prop="username">
@@ -16,7 +17,7 @@
             <el-form-item class="Vcode-item" label="Vcode" prop="vcode">
                 <el-input type="text" v-model="formLabelAlign.vcode"></el-input>
                 <div class="vcode" @click="getVcode" id="Vcode">
-                    <img src="http://localhost:2003/uploads/avatar-1598079578699.jpg" alt="">
+                    <!-- <img src="http://localhost:2003/uploads/avatar-1598079578699.jpg" alt=""> -->
                     <span class="vcode-span">获取验证码</span>
                 </div>
             </el-form-item>
@@ -28,7 +29,7 @@
                 <el-button type="primary" @click="submitForm">Login</el-button>
             </el-form-item>
             <el-form-item class="remember">
-                <el-button type="text" @click="goto">没有账号？点此注册</el-button>
+                <!-- <el-button type="text" @click="goto">没有账号？点此注册</el-button> -->
             </el-form-item>
             </el-form>
         </div>
@@ -42,6 +43,7 @@ export default {
       return {
         labelPosition: 'right',
         remember: true,
+        avatar:"",
         formLabelAlign: {
           username: '',
           password: '',
@@ -82,17 +84,12 @@ export default {
             this.$refs["formLabelAlign"].validate(async (valid) => {
                 if (valid) {
                     const {formLabelAlign} = this
-                    const {data} = await this.$request.get("/login",
-                    {params:{mdl:this.remember,...formLabelAlign}});
+                    const {data} = await this.$request.post("/login",
+                    {mdl:this.remember,...formLabelAlign});
                     if(data.code === 1){
                         
                         //登录成功后保存cookie
-                        // for(let key in data.data){
-                        //     sessionStorage.setItem(key,data.data[key])
-                        // }
-                        
-                        // sessionStorage.setItem("token", 'true');
-
+                        console.log("用户信息：",data);
                         //把用户信息保存到本地
                         localStorage.setItem("user",JSON.stringify(data.data));
                         // $vue.$router
@@ -113,10 +110,23 @@ export default {
     },
     created() {
         $vue = this;
+        let userinfor = localStorage.getItem("user");
+        try {
+            userinfor = JSON.parse(userinfor);
+        } catch (error) {
+            userinfor = userinfor
+        }
+        if(!userinfor){
+            userinfor = {}
+        }
+        this.avatar = userinfor.headImg?userinfor.headImg:this.avatar
+    },
+    mounted() {
+        // this.getVcode()
     },
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .login{
         width: 100%;
         height: 100%;
@@ -207,7 +217,7 @@ export default {
         img{
             object-fit: cover;
             position: absolute;
-            left: -40px;
+            left: 0px;
         }
     }
 </style>

@@ -9,12 +9,12 @@ const mongo = require('../utils/mongo');
 const {password_privateKey}=require("../config.json");
 
 // 登录
-router.get('/', async (req, res) => {
-    let { username:login, password, vcode, mdl } = req.query;
+router.post('/', async (req, res) => {
+    let { username:login, password, vcode, mdl } = req.body;
 
     // 从会话中获取验证码
     // 校验验证码
-    // console.log('login.session=', req.session)
+    console.log('req.body', req.body)
     if (vcode !== req.session.vcode) {
         res.send(formatData({ code: 10 }))
         return;
@@ -44,13 +44,32 @@ router.get('/', async (req, res) => {
         
         result = result[0];
         let userinfo = await mongo.find('userinfo', { login});
-        Object.assign(result,userinfo);
+        // Object.assign(result,userinfo);
+        result={
+            ...userinfo[0]
+        }
+        result.roleName = getName(result.role)
         result.authorization = authorization
         res.send(formatData({ data: result }));
     } else {
         res.send(formatData({ code: 0 }))
     }
 })
+
+function getName(role){
+    let Name = "普通用户";
+    switch (role) {
+        case "admin":
+            Name = "管理员";
+            break;
+        case "user":
+            Name = "普通用户";
+            break;
+        default:
+            break;
+    }
+    return Name
+}
 
 
 
