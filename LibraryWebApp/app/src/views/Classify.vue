@@ -9,13 +9,13 @@
           </h1>
         </van-col>
         <van-col span="13">
-              <van-cell-group>
-                <van-field v-model="value" @focus="searchInput()" class="searchInput" placeholder="日本学术文库-日本的佛教与神祇信仰" />
-              </van-cell-group>
-            </van-col>
-            <van-col span="3">
-              <van-icon class="search" name="search" color="#fff" />
-            </van-col>
+          <van-cell-group>
+            <van-field @focus="searchInput()" class="searchInput" placeholder="日本学术文库-日本的佛教与神祇信仰" />
+          </van-cell-group>
+        </van-col>
+        <van-col span="3">
+          <van-icon class="search" name="search" color="#fff" />
+        </van-col>
       </van-row>
     </header>
     <van-tree-select
@@ -154,11 +154,10 @@ export default {
     };
   },
   methods: {
-  searchInput(){
-        this.$router.push({
-          name:'Search',
-        })
-       
+    searchInput() {
+      this.$router.push({
+        name: "Search",
+      });
     },
     gotolist(booktype) {
       this.$router.push({
@@ -172,13 +171,6 @@ export default {
 };
 </script scope>
 <style lang="scss" scope>
-html,
-body,
-#app {
-  background-color: #f3f3f3;
-  height: 100%;
-}
-
 .van-tree-select__content {
   flex: 3;
 }

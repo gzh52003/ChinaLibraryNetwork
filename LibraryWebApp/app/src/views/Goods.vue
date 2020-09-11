@@ -40,13 +40,13 @@
         <p class="author">
           <em>作者： {{data.author}} 著</em>
           <!-- //购物车 -->
-          <van-icon name="shopping-cart-o" @click="buyNow(data._id)" />
+          <van-icon size="20" name="shopping-cart-o" @click="buyNow(data._id)" />
         </p>
         <p class="publisher">出版社： {{data.publisher}}</p>
         <p class="wenxintishi">温馨提示：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8.9成新、切口有划线标记、光盘等附件不全</p>
         <!-- <van-tag plain type="primary">{{data.author}}</van-tag> -->
       </div>
-      <h3>本类五星书</h3>
+      <h3 class="wuxing">本类五星书</h3>
       <van-grid :border="false" :column-num="3" class="goodslist">
         <van-grid-item v-for="item in recommend" :key="item._id" @click="toTop('0')">
           <van-image :src="item.url" style="height:6rem" @click="gotoDetail(item._id)" />
@@ -238,7 +238,7 @@ export default {
   // border-bottom: 0.3rem solid #e60000;
   // margin-left: 0.1rem;
   height: 2.5rem;
-  font-size: 0.88rem;
+  font-size: 1rem;
   padding-top: 0.7rem;
   padding-left: 1.5rem;
   // margin-left: 0.5rem;
@@ -260,13 +260,14 @@ export default {
   .publisher {
     height: 2rem;
     color: #333;
-    font-size: 0.22rem;
+    font-size: 0.8rem;
     // background-size: 0.16rem 0.28rem;
     padding-top: 0.5rem;
     padding-bottom: 0.2rem;
     border-bottom: 0.01rem solid #ccc;
   }
   .author {
+    font-size: 0.8rem;
     display: flex;
     justify-content: space-between;
     .van-icon {
@@ -274,6 +275,7 @@ export default {
     }
   }
 }
+
 //内容
 .main {
   padding-bottom: 3.5rem;
@@ -289,7 +291,7 @@ export default {
   .recoLagu {
     padding-top: 1rem;
     color: #333333;
-    font-size: 0.2rem;
+    font-size: 0.8rem;
     line-height: 1rem;
     // line-height: 0.3rem;
   }
@@ -301,17 +303,19 @@ export default {
   }
 
   .prices {
+    font-size: 0.8rem;
     padding-top: 1rem;
+    // font-size: 1rem;
     display: flex;
     justify-content: space-between;
     span {
       i {
-        font-size: 0.5rem;
+        font-size: 1rem;
         color: #e60000;
         font-weight: bold;
       }
       em {
-        font-size: 0.2rem;
+        font-size: 0.8rem;
         color: #333333;
         margin: 0.02rem 0 0 0.15rem;
       }
@@ -320,7 +324,7 @@ export default {
   .wenxintishi {
     padding-top: 1rem;
     color: #e60000;
-    font-size: 0.2rem;
+    font-size: 0.8rem;
     line-height: 1rem;
   }
   h3 {
@@ -330,7 +334,7 @@ export default {
     line-height: 2rem;
     background-color: #f3f3f3;
     // background: #f3f3f3;
-    font-size: 0.26rem;
+    font-size: 0.9rem;
     color: #333333;
     margin-top: 0.3rem;
     font-weight: bold;
