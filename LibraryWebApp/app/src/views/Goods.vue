@@ -159,7 +159,7 @@ export default {
       const { _id } = this.data;
       //console.log(_id);
       //console.log("this.cartlist", this.cartlist);
-      debugger;
+      // debugger;
       const current = this.cartlist.filter((item) => item._id === _id)[0];
       //console.log("current", current);
       if (current) {

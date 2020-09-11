@@ -132,7 +132,7 @@
               </p>
               <div class="Tprice">
                 <van-row type="flex">
-                  <van-col span="14" class="TpriceT">
+                  <van-col span="24" class="TpriceT">
                     团购价:<span class="TpriceTPrice">{{item.price}}</span>
                   </van-col>
                 </van-row>
@@ -721,8 +721,6 @@ export default {
   created() {
     let booktype=this.booktype;
     this.getGeneralList(booktype);
-
-    
   }
 }
 </script>
@@ -758,7 +756,7 @@ header{
     line-height: 36px;
 }
 .search{
-  font-size:30px;
+  font-size:2rem;
   padding-top:11px;
   margin-left:10px;
 }
@@ -766,7 +764,7 @@ header{
     height: 36px;
     padding:0px;
     padding-left:10px;
-    font-size:14px;
+    font-size:1rem;
     line-height: 36px;
     border-radius: 36px;
 }
@@ -797,7 +795,7 @@ header{
     line-height: 20px;
 }
 .van-notice-bar{
-  font-size:0.24rem;
+  font-size:1rem;
   height:30px;
   margin:10px;
 }
@@ -818,14 +816,14 @@ header{
     height:34px;
     background:#f9bd00;
     .newBookWrapTith{
-      font-size:0.8rem;
+      font-size:1.2rem;
       line-height:34px;
       color: #fff;
       margin-left:10px;
     }
   }
   .newBookWrapTitM{
-    font-size:0.8rem;
+    font-size:1rem;
     line-height:24px;
     color: #fff;
     background:#f9bd00;
@@ -840,7 +838,7 @@ header{
 }
 .newBookListTit{
   color: #000;
-  font-size: .5rem;
+  font-size: 1rem;
   line-height: 18px;
   margin-top: 0.5rem;
   padding: 0 0.1rem;
@@ -859,12 +857,12 @@ header{
     .price {
       float: left;
       color: #e60000;
-      font-size: 0.24rem;
+      font-size: 0.9rem;
     }
     .original {
       float: left;
       color: #999999;
-      font-size: 0.22rem;
+      font-size: 0.8rem;
       margin-left: 7px;
     }
   
@@ -884,7 +882,7 @@ header{
   .tstTit{
     height:35px;
     .tstWrapTitM{
-    font-size:0.8rem;
+    font-size:1.2rem;
     line-height:24px;
     margin-top:5px;
       .tstWrapMore{
@@ -904,7 +902,7 @@ header{
   width:100%;
   line-height: 18px;
   height: 36px;
-  font-size: 0.22rem;
+  font-size: 1rem;
   overflow: hidden;
   padding: 0 6px;
   margin-top: 10px;
@@ -920,18 +918,18 @@ header{
 .TpriceT {
     padding: 0 6px;
     color: #e60000;
-    font-size: 0.18rem;
+    font-size: 1rem;
     line-height: 15px;
     margin-top: 5px;
     .TpriceTPrice{
-      font-size: 0.22rem;
+      font-size: 1rem;
     }
 }
 .tstOriginal{
   float: left;
   color: #9a9a9a;
   padding: 0 6px;
-  font-size: 0.2rem;
+  font-size: 1rem;
   line-height: 18px;
 }
 
@@ -939,7 +937,7 @@ header{
     float: right;
     height: 15.6px;
     line-height: 15.6px;
-    font-size: 0.18rem;
+    font-size: 0.8rem;
     color: #fff;
     background: #efb64d;
     border-radius: 15.6px 0 0 15.6px;
@@ -965,7 +963,7 @@ header{
 .hottockListTopR {
   .name {
     color: #000;
-    font-size: 0.22rem;
+    font-size: 1rem;
     line-height: 18px;
     margin-top: 10px;
     height: 18px;
@@ -997,19 +995,19 @@ header{
     margin-top: 4px;
     .price{
       color: #e60000;
-      font-size: 0.24rem;
+      font-size: 1rem;
     }
     .original{
       color: #999999;
-      font-size: 0.22rem;
+      font-size: 0.9rem;
       margin-left: 7px;
     }
   }
   .hottockListReview{
     color: #666666;
-    font-size: 0.2rem;
-    line-height: 18px;
-    height: 55px;
+    font-size: 1rem;
+    line-height: 22px;
+    // height: 60px;
     padding: 3px 9px;
     background: #f3f3f3;
     margin: 6px 0 0;
@@ -1032,12 +1030,12 @@ header{
 
 .hottockListBotTImg{
   max-width: 70%;
-  height: 120px;
+  height: 110px;
 }
 .hottockListBotB{
   .name {
     color: #000;
-    font-size: 0.22rem;
+    font-size: 1rem;
     line-height: 18px;
     margin-top: 10px;
     height: 18px;
@@ -1072,17 +1070,17 @@ header{
     margin-top: 4px;
     .price{
       color: #e60000;
-      font-size: 0.24rem;
+      font-size: 1rem;
     }
     .original{
       color: #999999;
-      font-size: 0.22rem;
+      font-size: 1rem;
       margin-left: 7px;
     }
   }
   .hottockListBotBReview{
     color: #666666;
-    font-size: 0.2rem;
+    font-size: 0.75rem;
     line-height: 18px;
     height: 42px;
     padding: 3px 9px;
@@ -1104,9 +1102,9 @@ header{
     display:inline-block;
     width:100%;
     text-align: center;
-    font-size: 0.24rem;
+    font-size: 1rem;
     color: #4a4a4a;
-    height: 50px;
+    // height: 50px;
     line-height: 50px;
     background: #efbf41;
 }
@@ -1122,7 +1120,7 @@ header{
   margin-bottom: 2px;
 }
 .recommenListLImg{
-  height:262px;
+  height:225px;
 }
 
 /* 新书速递 */
@@ -1134,7 +1132,7 @@ header{
 }
 .courierListTit{
   color: #000;
-    font-size: .5rem;
+    font-size: 1rem;
     line-height: 18px;
     margin-top: 0.5rem;
     padding: 0 0.1rem;
@@ -1149,8 +1147,8 @@ header{
 
 /* 畅销榜 */
 .sellHotBookImg{
-    max-width: 70%;
-    height:80%;
+    max-width: 60%;
+    height:50%;
 }
 .sellHotBookprice {
   del {
@@ -1169,11 +1167,11 @@ header{
 }
 .sellHotBookListName{
   color: #000;
-  font-size: 0.22rem;
+  font-size: 1rem;
   line-height: 18px;
   margin-top: 7px;
   padding: 0 9px 0 12px;
-  height: 40px;
+  height: 35px;
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-line-clamp: 2;
@@ -1188,11 +1186,11 @@ header{
     span {
       float: left;
       color: #e60000;
-      font-size: 0.24rem;
+      font-size: 1rem;
     }
     del{
       color: #999999;
-      font-size: 0.22rem;
+      font-size: 0.9rem;
       margin-left: 7px;
     }
 }
