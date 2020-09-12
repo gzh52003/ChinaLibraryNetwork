@@ -138,6 +138,7 @@ export default {
         },
       });
       this.data = data.data;
+      console.log("this.data", this.data);
     },
     async getRecommend() {
       let booktype = this.booktype;
@@ -148,7 +149,7 @@ export default {
         },
       });
       this.recommend = recommend;
-      //console.log(this.recommend);
+      console.log(this.recommend);
     },
     add2cart() {
       // 添加当前商品到购物车;
@@ -193,7 +194,7 @@ export default {
   },
   async created() {
     let result = this.$route.params;
-    //console.log("result", result);
+    // console.log("result", result);
     this.booktype = result.booktype;
     let id = result.id;
     this.getData(id);
