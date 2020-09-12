@@ -18,6 +18,7 @@
           slot="prepend"
           placeholder="请选择"
           @change="getuserlistBytype"
+          style="width:90px"
         >
           <el-option label="账号" value="login"></el-option>
           <el-option label="用户名" value="username"></el-option>
@@ -254,4 +255,11 @@ export default {
   color: #fff;
 }
 
+
+</style>
+<style lang="scss">
+  .el-icon-search:before{
+    color: #fff !important;
+    font-size: 18px !important;
+  }
 </style>

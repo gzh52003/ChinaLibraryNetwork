@@ -40,7 +40,11 @@
         <p class="author">
           <em>作者： {{data.author}} 著</em>
           <!-- //购物车 -->
+<<<<<<< HEAD
           <van-icon size="20" name="shopping-cart-o" @click="add2cart" />
+=======
+          <van-icon size="20" name="shopping-cart-o" @click="buyNow(data._id)" />
+>>>>>>> 6406b7c960b407ee299f770b3bd49679d5f9a083
         </p>
         <p class="publisher">出版社： {{data.publisher}}</p>
         <p class="wenxintishi">温馨提示：5折以下图书主要为出版社尾货，大部分为全新，个别图书品相8.9成新、切口有划线标记、光盘等附件不全</p>
@@ -157,6 +161,7 @@ export default {
         },
       });
       this.data = data.data;
+      console.log("this.data", this.data);
     },
     async getRecommend() {
       let booktype = this.booktype;
@@ -167,7 +172,7 @@ export default {
         },
       });
       this.recommend = recommend;
-      //console.log(this.recommend);
+      console.log(this.recommend);
     },
     add2cart() {
       // 添加当前商品到购物车;
@@ -196,12 +201,40 @@ export default {
         // this.$store.commit("addCartAsync",this);
       }
     },
+<<<<<<< HEAD
     // buyNow(id) {
     //   let goods = this.goods;
     //   // console.log(goods);
     //   this.$store.commit("add", goods);
     //   // .goodslist.unshift(goods)
     //   //console.log("goodsid", id);
+=======
+    buyNow(id) {
+      let goods = this.goods;
+      this.$store.commit("add", goods);
+      // .goodslist.unshift(goods)
+      //console.log("goodsid", id);
+
+      // 添加当前商品到购物车，并跳转到购物车页面
+      this.add2cart();
+      this.$router.push("/cart");
+    },
+  },
+  computed: {
+    cartlist() {
+      //模块化，调用时候加上模块
+      return this.$store.state.cart.goodslist;
+    },
+  },
+  async created() {
+    let result = this.$route.params;
+    // console.log("result", result);
+    this.booktype = result.booktype;
+    let id = result.id;
+    this.getData(id);
+    this.getRecommend();
+    // this.toTop();
+>>>>>>> 6406b7c960b407ee299f770b3bd49679d5f9a083
 
     //   // 添加当前商品到购物车，并跳转到购物车页面
     //   this.add2cart();
