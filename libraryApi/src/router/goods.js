@@ -59,9 +59,9 @@ router.get('/all', async (req, res) => {
 router.get('/check', async (req, res) => {
     // console.log(123);
     const { title, id, } = req.query;
-    console.log("333333", booktype);
+    //console.log("333333", booktype);
     const result = await mongo.find("goods", { title });
-    console.log("666666666666", result);
+    //console.log("666666666666", result);
     if (result.length > 0 && id !== result[0]._id.toString()) {
         res.send(formatData({ code: 0 }))
     } else {
