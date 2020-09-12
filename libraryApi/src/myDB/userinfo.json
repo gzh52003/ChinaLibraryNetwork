@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5f43c38d09597557f0edcafb"},"login":"admin","username":"老李","role":"admin","headImg":"","age":18,"gender":"m","email":"1746934940@qq.com"}
+{"_id":{"$oid":"5f47ad3609597557f0efea4a"},"login":"laowei","username":"老韦","role":"admin","headImg":"","age":18,"gender":"m","email":"1746934940@qq.com"}
+{"_id":{"$oid":"5f47ad5c09597557f0efea55"},"login":"xiaoli","username":"小李","role":"admin","headImg":"","age":18,"gender":"m","email":"1746934940@qq.com"}
+{"_id":{"$oid":"5f47b85dbf3dae5a301319db"},"login":"xiaoming","username":"小明","gender":"m","age":18,"email":"1746934940@qq.com","role":"user","baseurl":"","headImg":""}

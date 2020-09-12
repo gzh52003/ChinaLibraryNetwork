@@ -205,7 +205,7 @@ export default {
         ["value"]: this.input3,
       });
       this.goodslist = data;
-      
+
       console.log(data);
     },
     //批量删除
@@ -280,3 +280,8 @@ export default {
   margin-top: 45px !important;
 }
 </style>
+
+
+
+
+
