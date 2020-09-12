@@ -11,12 +11,13 @@
             src="https://img.yzcdn.cn/vant/cat.jpeg"
           />
           <div class="info">
-            <h4 class="username">老李</h4>
-            <p class="accType">超级VIP用户</p>
+            <h4 v-if="isLogin" class="username">{{username}}</h4>
+            <p v-if="isLogin" class="accType">{{roles}}</p>
+            <h4 v-if="!isLogin" @click="goto" class="username">登录/注册</h4>
           </div>
           <!-- 地址 -->
           <div class="address">
-            <span>收货地址管理</span>
+            <span @click="manageAddress">收货地址管理</span>
           </div>
         </div>
         <van-row class="userInfo" gutter="10">
@@ -71,7 +72,7 @@
       <!-- 猜你喜欢 -->
       <van-cell title="会员服务" value="会员俱乐部 &gt;" icon="like-o" class="hobby" />
 
-      <van-button color="#666a6b" block class="login" @click="goto()">退出当前账号</van-button>
+      <van-button v-if="isLogin" color="#666a6b" block class="login" @click="goto()">退出当前账号</van-button>
     </div>
     
   </div>
@@ -91,22 +92,33 @@ Vue.use(Field)
 export default {
   methods: {
     onClickLeft() {
-      //console.log("返回");
+      console.log("返回");
     },
     goto(){
-      //console.log("退出登录");
+      console.log("退出登录");
       this.$router.replace({name:'Login'});
       this.$store.commit('initUserinfo',{});
       // this.
+    },
+    manageAddress(){
+      this.$router.push({name:'Address'});
     }
   },
   data() {
     return {
-      value1:1,
-      value2:2,
-      sms:1,
+      username:"",
+      roles:"",
       isLogin: false,
     };
+  },
+  created() {
+    console.log(this.$store.state.Login.userinfo);
+    const userinfo = this.$store.state.Login.userinfo;
+    if(userinfo._id){
+      this.isLogin = true;
+      this.username = userinfo.username
+      this.roles = userinfo.roleName
+    }
   },
 };
 </script>
@@ -116,7 +128,7 @@ body,
 .information {
   background: #f7f8fa;
   height: 100%;
-  padding-bottom:80px;
+  padding-bottom: 2rem;
 }
 .personal-center {
   padding: 0;
@@ -161,7 +173,7 @@ body,
     justify-content: center;
   }
   .username {
-    font-size: 1.2rem;
+    font-size: .85rem;
     font-weight: 400;
     padding: 0;
     margin: 0;
