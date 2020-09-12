@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
     // 处理排序参数
     sort = sort.split(',');// ['price'],['price','-1']
     // 查询所有商品
-    const result = await mongo.find('goods', obj, { skip, sort, limit })
+    const result = await mongo.find("goods", obj, { skip, sort, limit })
     console.log("obj", obj);
     console.log("result", result);
     res.send(result);
@@ -60,7 +60,7 @@ router.get('/check', async (req, res) => {
     // console.log(123);
     const { title, id, } = req.query;
     console.log("333333", booktype);
-    const result = await mongo.find(goods, { title });
+    const result = await mongo.find("goods", { title });
     console.log("666666666666", result);
     if (result.length > 0 && id !== result[0]._id.toString()) {
         res.send(formatData({ code: 0 }))

@@ -23,7 +23,6 @@ router.get('/', async (req, res) => {
 
 //增加数据
 router.post('/', async (req, res) => {
-
     let { title, author, pulishTiem, publisher, sellPrice, qty, discount, priceTit, kucun, recoLagu } = req.body;
     console.log(req.body);
     let result

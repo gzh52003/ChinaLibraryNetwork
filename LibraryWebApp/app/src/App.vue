@@ -2,8 +2,10 @@
   <div id="app">
     <router-view/>
     <van-tabbar v-model="active" active-color="#e60000" route v-show="showTabbar">
-      <van-tabbar-item  :icon="item.icon" v-for="item in menu" :key="item.name" :to="item.path">{{item.text}}</van-tabbar-item>
+      <van-tabbar-item  :badge="item.name==='cart'?cartLength:''" :icon="item.icon" v-for="item in menu" :key="item.name" :to="item.path">{{item.text}}</van-tabbar-item>
     </van-tabbar>
+
+
 
     <!-- <van-tabbar v-model="active" route v-show="showTabbar">
       <van-tabbar-item :badge="item.name==='cart'?cartLength:''" :icon="item.icon" v-for="item in menu" :key="item.name" :to="item.path">{{item.text}}</van-tabbar-item>
@@ -62,9 +64,9 @@ export default {
     }
   },
   computed:{
-    // cartLength(){
-    //   return this.$store.state.cart.goodslist.length
-    // },
+    cartLength(){
+      return this.$store.state.cart.cartList.length
+    },
     showTabbar(){
       return this.$store.state.common.showTabbar
     }
@@ -74,7 +76,7 @@ export default {
   },
   created(){
     // this.$store.dispatch('getCart');
-    console.log(this.$store)
+    // console.log(this.$store)
   }
 }
 </script>

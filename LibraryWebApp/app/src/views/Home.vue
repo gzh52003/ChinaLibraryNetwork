@@ -879,6 +879,7 @@ header{
 
 /* 淘书团 */
 .tstWrap{
+  width:100%;
   .tstTit{
     height:35px;
     .tstWrapTitM{
@@ -1104,7 +1105,6 @@ header{
     text-align: center;
     font-size: 1rem;
     color: #4a4a4a;
-    // height: 50px;
     line-height: 50px;
     background: #efbf41;
 }
@@ -1120,7 +1120,7 @@ header{
   margin-bottom: 2px;
 }
 .recommenListLImg{
-  height:225px;
+  height:262px;
 }
 
 /* 新书速递 */
@@ -1148,7 +1148,7 @@ header{
 /* 畅销榜 */
 .sellHotBookImg{
     max-width: 60%;
-    height:50%;
+    height:55%;
 }
 .sellHotBookprice {
   del {

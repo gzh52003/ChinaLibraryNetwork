@@ -24,13 +24,16 @@
     <van-card
       :price="item.sellPrice"
       :title="item.title"
-      :thumb="item.url"
+    
       v-for="item in cartList"
       :key="item._id"
-      @click-thumb="gotoDetail(item._id)"
+
     >
       <template #tag>
-        <van-checkbox v-model="item.checked"></van-checkbox>
+        <van-checkbox v-model="item.checked" class="selChecked"></van-checkbox>
+      </template>
+      <template #thumb>
+        <van-image :src='item.url' class="goodsImg" @click="gotoDetail(item._id)"></van-image>
       </template>
       <template #price>
         <van-row>
@@ -48,11 +51,11 @@
         </p> -->
 
         <van-row>
-          <van-col span="18">
+          <van-col span="16">
             <van-stepper :value="item.qty" input-width="20px" button-size="20px" theme="round" async-change integer @change="changeQty(item._id,$event)" />
           <!-- async-change: 点击按钮时不会直接修改数量，而是根据value的值来显示 -->
           </van-col>
-          <van-col span="6">
+          <van-col span="8">
             <!-- <van-button plain size="mini" type="danger" icon="cross" @click.stop="removeItem(item._id)"></van-button> -->
             <van-icon name="like-o" size="20"/>
             <van-icon name="delete" size="20" @click.stop="removeItem(item._id)" />
@@ -98,6 +101,7 @@ export default {
     onClickLeft(){
       this.$router.push('/home');
     },
+  
     onSubmit(){
       
     },
@@ -128,27 +132,32 @@ export default {
   },
 
   computed:{
-    ...mapState({
+  
       // cartlist:'goodslist', // 等效于：cartlist()=>this.$store.state.goodslist
 
       // 映射模块化后的数据
-     cartList(state){
+     cartList:{
         // //console.log('mapState=',state)
-        return state.cart.cartList
-      }
-    }),
+        get(){
+          return this.$store.state.cart.cartList
+        },
+          // return state.cart.cartList
 
+        set(val){
+          this.$store.commit("checkAll123",val)
+        }
+      },
 
     checkAll:{
       get(){
         return this.cartList.every(item=>item.checked);
       },
       set(val){
+        console.log(this)
         this.cartList = this.cartList.map(item=>{
           item.checked = val;
           return item;
         });
-        // //console.log(this.cartList)
       }
     },
 
@@ -198,6 +207,20 @@ export default {
   padding-bottom:20px;
 }
 
+.van-card__tag {
+      top: 30px;
+      left: -30px;
+    }
+.van-card__thumb{
+  margin-left: 10px;
+}
+.goodsImg{
+  width:70px;
+  height:75px;
+}
+.van-card{
+  padding-left:30px;
+}
 .price {
   font-size:.95rem;
   margin-bottom: 10px;
