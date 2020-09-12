@@ -43,21 +43,30 @@ router.get('/all', async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get('/check', async (req, res) => {
     // console.log(123);
     const { title, id, } = req.query;
-    //console.log("333333", booktype);
+    console.log("333333", booktype);
     const result = await mongo.find("goods", { title });
     console.log("666666666666", result);
-    // console.log("333333", booktype);
-    const result = await mongo.find("goods", { title });
-    // console.log("666666666666", result);
     if (result.length > 0 && id !== result[0]._id.toString()) {
         res.send(formatData({ code: 0 }))
     } else {
         res.send(formatData())
     }
-
 })
 
 /* router.get('/check2', async (req, res) => {
@@ -106,8 +115,8 @@ router.get('/search', async (req, res) => {
 })
 
 
-router.get('/:id/kucun', async (req, res) => {
-    const { id } = req.params;
+router.get('/:id/kucun',async (req,res)=>{
+    const {id} = req.params;
     try {
         const result = await mongo.find("cart", { _id: id })
         res.send(formatData({ data: result[0] }))

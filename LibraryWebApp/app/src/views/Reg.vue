@@ -64,15 +64,15 @@ export default {
     async getVcode(){
       //点击获取验证码
       const {data} = await this.$request.get("/vcode");
-      console.log(data);
+      //console.log(data);
       if(data.code === 1){
-          console.log(1);
+          //console.log(1);
           document.querySelector("#Vcode").innerHTML = data.data
       } 
     },
     async submitForm() {
             // this.$refs["formLabelAlign"].validate(async (valid) => {
-                // console.log(valid);
+                // //console.log(valid);
                 // valid为校验结果，全部校验通过是值为true,否则为false
                 // if (valid) {
                     let params = {
@@ -91,18 +91,18 @@ export default {
                     }
 
                 // } else {
-                // console.log("error submit!!");
+                // //console.log("error submit!!");
                 // return false;
                 // }
             // });
         },
         onFailed(errorInfo) {
-          console.log('failed', errorInfo);
+          //console.log('failed', errorInfo);
         },
        async checkUsername(value, messges){
       
             var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
-            console.log("打印一下",value, messges);
+            //console.log("打印一下",value, messges);
             if (!patrn.exec(value)){
                 return false;
             }
@@ -128,7 +128,7 @@ export default {
                 }
                 
         },async checkCode(rule, value, callback){
-            console.log(value);
+            //console.log(value);
             if(value.length > 3){
                 const {data} = await this.$request.get("/vcode/checkCode",
                 {params:{"vcode":value}});
@@ -142,6 +142,48 @@ export default {
         }
   },
   data() {
+    // const checkUsername = async (rule, value, callback) => {
+    //   //console.log("打印一下");
+
+    //         var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/;
+    //         if (!patrn.exec(value)){
+    //             return callback(new Error("只能输入5-20个以字母开头、可带数字、“_”、“.”的字串"));
+    //         }
+            
+    //         const {data} = await this.$request.get("/reg/check",
+    //             {params:{"username":value}});
+            
+    //         if (data.code === 0) {
+    //             return callback(new Error("用户名已存在"));
+    //         }else{
+    //             // 规则通过后的回掉
+    //             callback();
+    //         }
+    //     };
+    //     const checkPassword = (rule, value, callback) => {
+            
+    //         let patrn=/^(\w){6,20}$/;  
+    //             if (!patrn.exec(value)){
+    //                 return callback(new Error("只能输入6-20个字母、数字、下划线"));
+    //             }else{
+    //                 // 规则通过后的回掉
+    //                 callback();
+    //             }
+                
+    //     };
+    //     const checkCode = async (rule, value, callback) => {
+    //         //console.log(value);
+    //         if(value.length > 3){
+    //             const {data} = await this.$request.get("/vcode/checkCode",
+    //             {params:{"vcode":value}});
+
+    //             if(data.code !== 1)callback(new Error("请输入正确的验证码"));
+    //         }else{
+    //             callback(new Error("请输入验证码"));
+    //             return
+    //         }
+    //         callback();
+    //     };
     return {
       username:"",
       password:"",
@@ -153,11 +195,18 @@ export default {
             ], 
             password:[
                 { required: true, message: "密码必填", trigger: 'onBlur' },
-                
+                // 自定义校验规则
+                // {
+                //     validator: checkPassword,
+                //     trigger: ['blur', 'change'],
+                // },
             ],
             code:[
                 { required: true, message: "验证码必填", trigger: 'onChange' },
-                
+                // {
+                //     validator: checkCode,
+                //     trigger: ['blur', 'change'],
+                // },
             ]}
     };
   },
@@ -172,6 +221,119 @@ body,
 .information {
   background: #f7f8fa;
   height: 100%;
+}
+.personal-center {
+  padding: 0;
+  background: rgb(255, 133, 42);
+  color: #fff;
+}
+.userInfo {
+  text-align: center;
+  color: #fff;
+  .van-col {
+    height: 3.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    span {
+      background: rgba($color: #302d2d, $alpha: 0.2);
+      padding: 0.1rem 0;
+      &:nth-child(1) {
+        font-size: 1.2rem;
+      }
+      &:nth-child(2) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+.content {
+  padding: 1rem;
+  // position: relative;
+  display: flex;
+  .address {
+    flex: 1;
+    text-align: right;
+    padding-top: 2rem;
+    color: #fff;
+  }
+  .info {
+    // position: absolute;
+    padding-left: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .username {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
+  .accType {
+    font-size: 0.75rem;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* 订单 */
+
+.fuwu,
+.huiyuan,
+.dingdan,
+.hobby {
+  .van-icon-records::before,
+  .van-icon-coupon-o::before,
+  .van-icon-friends-o::before,
+  .van-icon-star-o::before,
+  .van-icon-like-o::before {
+    color: sandybrown;
+    font-size: 1rem;
+  }
+  // .van-icon-coupon-o::before{
+  //   color: sandybrown;
+  //   font-size: 1rem;
+  // }
+  .van-cell__title span {
+    font-size: 1rem;
+  }
+  .van-cell__value span {
+    font-size: 0.7rem;
+  }
+}
+.hobby {
+  margin-top: 1rem;
+}
+
+/* 订单 */
+.wallet {
+  text-align: center;
+  padding: 1rem 0;
+  // color: #fff;
+  color: #646566;
+  background: #fff;
+  .van-col {
+    height: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    span {
+      padding: 0.1rem 0;
+      &:nth-child(1) {
+        font-size: 0.5rem;
+      }
+      &:nth-child(2) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+/* 服务与反馈 */
+.fuwu {
+  margin-top: 1rem;
 }
 
 .contain{

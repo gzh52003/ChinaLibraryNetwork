@@ -57,10 +57,6 @@ const routes = [
     path: '/reg',
     name: 'Reg',
     component:()=>import('../views/Reg.vue')
-  },{
-    path: '/address',
-    name: 'Address',
-    component: () => import('../views/AddressList.vue')
   }
 ]
 

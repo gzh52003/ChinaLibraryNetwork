@@ -52,12 +52,7 @@ router.get('/:id',async(req,res)=>{
         // 过滤字段：password不返回前端
         field:{password:false}
     });
-    const resultID = await mongo.find('user',{login:result[0].login},{
-        // 过滤字段：password不返回前端
-        field:{password:false}
-    });
     console.log(result)
-    result[0]._id = resultID[0]._id;
     res.send(formatData({data:result[0]}));
 })
 

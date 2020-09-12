@@ -20,7 +20,6 @@ router.post('/',async (req,res)=>{
     let result
     try{
         result = await mongo.insert('user',{login:username,password});
-        result = await mongo.insert('userinfo',{login:username});
         res.send(formatData());
     }catch(err){
         res.send(forMatData({code:0}))
@@ -29,11 +28,10 @@ router.post('/',async (req,res)=>{
 })
 
 router.get('/check',async (req,res)=>{
-    const {username,_id} = req.query;
+    const {username} = req.query;
     
-    let result = await mongo.find('user',{login:username});
-    result = result.filter(item=>item._id != _id);
-    console.log("输出过滤结果result:",result);
+    const result = await mongo.find('user',{login:username});
+    
     if(result.length>0){
         res.send(formatData({code:0}))
     }else{

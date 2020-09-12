@@ -14,7 +14,7 @@
       label-width="100px"
     >
       <el-form-item label="账号" prop="login">
-        <el-input type="text" v-model="ruleForm.login" :disabled="isShow?true:false"></el-input>
+        <el-input type="text" v-model="ruleForm.login" :disabled="userid?true:false"></el-input>
       </el-form-item>
       <el-form-item label="用户名" prop="username">
         <el-input type="text" v-model="ruleForm.username"></el-input>
@@ -26,7 +26,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="角色" prop="role">
-        <el-select v-model="ruleForm.role":disabled="isShow?true:false">
+        <el-select v-model="ruleForm.role">
           <el-option label="管理员" value="admin"></el-option>
           <el-option label="普通用户" value="user"></el-option>
         </el-select>
@@ -39,16 +39,24 @@
       </el-form-item>
       <el-form-item label="头像">
           <div class="demo-type">
-            <el-avatar :size="220" :src.sync="headImg" @click.native="uploadImg" id="avatarImg">
-              <!-- <img src="../../public/images/avatar5.jpg"/> -->
+            <el-avatar :size="220" :src.sync="headImg" @click.native="uploadImg">
+              <img :src="headImg"/>
             </el-avatar>
             <input type="file" name="avatar" id="avatar" style="width:0">
           </div>
       </el-form-item>
+      <!-- <el-form-item label="头像">
+        <div class="demo-type">
+          <el-avatar :size="100" :src.sync="ruleForm.headImg" @click.native="uploadImg">
+            <img :src="ruleForm.headImg"/>
+          </el-avatar>
+          <input type="file" name="avatar" id="avatar" style="width:0">
+        </div>
+      </el-form-item> -->
       <el-form-item prop="userid">
-        <el-button v-if="!userid" type="success" @click="submitForm">确定添加</el-button>
+        <el-button type="success" @click="submitForm">确定添加</el-button>
         <el-button v-if="userid" type="success" @click="submitForm">提交修改</el-button>
-        <el-button v-if="userid" type="success" @click="cancel">取消</el-button>
+        <el-button v-if="userid" type="success" @click="cancel">取消/完成</el-button>
       </el-form-item>
     </el-form>
     
@@ -74,8 +82,8 @@ export default {
           if (!patrn.exec(value)){
               return callback(new Error("只能输入2-20个的字"));
           }
-          callback();
-          /* const {data} = await this.$request.get("/reg/check",
+          
+          const {data} = await this.$request.get("/reg/check",
               {params:{"username":value}});
           
           if (data.code === 0) {
@@ -83,16 +91,16 @@ export default {
           }else{
               // 规则通过后的回掉
               callback();
-          } */
+          }
     };
     const checklogin = async(rule, value, callback) => {
       var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){1,19}$/;
           if (!patrn.exec(value)){
               return callback(new Error("只能输入2-20个以字母开头、可带数字、“_”、“.”的字串"));
           }
-          console.log("this.userid",this.userid);
+          
           const {data} = await this.$request.get("/reg/check",
-              {params:{"username":value,"_id":this.ruleForm._id}});
+              {params:{"username":value}});
           
           if (data.code === 0) {
               return callback(new Error("用户名已存在"));
@@ -103,11 +111,9 @@ export default {
     }
 
     return {
-      isShow:"",
       userid: "",
       headImg:"",
       ruleForm: {
-        _id:"",
         login:"",
         username: "",
         password:"123456",
@@ -118,7 +124,6 @@ export default {
         baseurl:"",
         headImg:""
       },
-      ruleFormOld:{},
       rules: {
         username:[
           { required: true, message: "用户名必填", trigger: "blur" },
@@ -155,48 +160,26 @@ export default {
   },
   methods: {
     submitForm() {
-      let gotoUpdata = true;
       this.$refs["ruleForm"].validate(async (valid) => {
         
         // valid为校验结果，全部校验通过是值为true,否则为false
         if (valid) {
             const {userid,ruleForm} = this
             if(userid){
-              for(let key in this.ruleFormOld){
-                if(this.ruleFormOld[key] != ruleForm[key]){
-                  gotoUpdata = false;
-                }
-              }
-              if(gotoUpdata){
+              const {data} = await this.$request.put("/userinfo/"+userid,{
+                  ...ruleForm
+              });
+              if(data.code === 1){
                   this.$message({
-                        type: "warning",
-                        message: "数据没有修改不允许提交",
-                    });
-
-                    return false;
+                    type: "success",
+                    message: "修改成功",
+                });
               }else{
-                const {data} = await this.$request.put("/userinfo/"+userid,{
-                      ...ruleForm
-                  });
-                  if(data.code === 1){
-                      this.$message({
-                        type: "success",
-                        message: "修改成功",
-                    });
-                  // ruleForm
-                  //更新本地数据
-                  let user = JSON.parse(localStorage.getItem("user"))
-                  Object.assign(user,ruleForm)
-                  localStorage.setItem("user",JSON.stringify(user))
-
-                  }else{
-                      this.$message({
-                        type: "error",
-                        message: "修改失败",
-                    });
-                  }
+                  this.$message({
+                    type: "fail",
+                    message: "修改失败",
+                });
               }
-              
             }else{
               const {data} = await this.$request.post("/userinfo",{
                   ...ruleForm
@@ -209,7 +192,7 @@ export default {
                 this.$router.replace({name:'userList'})
               }else{
                   this.$message({
-                    type: "error",
+                    type: "fail",
                     message: "添加失败",
                 });
               }
@@ -245,22 +228,23 @@ export default {
                   message: "上传成功！",
               });
                 // $vue.ruleForm.headImg = $vue.$baseurl + res.data.data.headImg
-                $vue.headImg = ($vue.$baseurl + res.data.data.headImg);
-                
-                document.querySelector("#avatarImg").innerHTML = `<img src="${$vue.headImg}"/>`
-                //设置本地数据
-                let userinfo = JSON.parse(localStorage.getItem("user"));
-                userinfo.headImg = res.data.data.headImg
-                localStorage.setItem("user",JSON.stringify(userinfo));
-                debugger;
-                // Vue.forceUpdate()
-
+                $vue.headImg = ($vue.$baseurl + res.data.data.headImg)
             }).catch(error=>{
                 $vue.$message({
                   type: "success",
                   message: "上传失败！",
               });
             })
+            // $.ajax({
+            //     url:"http://localhost:2003/upload",
+            //     method:"post",
+            //     data:formdata,
+            //     // cache : false,
+            //     processData : false, // 不处理发送的数据，因为data值是Formdata对象，不需要对数据做处理
+            //     contentType : false, // 不设置Content-type请求头
+            //     success : function(){console.log(1);},
+            //     error : function(){ console.log(2);}
+            // })
         }
     }
   },
@@ -269,35 +253,19 @@ export default {
     const { id } = this.$route.params;
     if(id){
       const { data } = await this.$request.get("/userinfo/" + id);
-      // data.data.headImg = this.$baseurl + data.data.headImg
+      data.data.headImg = this.$baseurl + data.data.headImg
       Object.assign(this.ruleForm, data.data);
-      Object.assign(this.ruleFormOld,data.data)
-      this.headImg = this.$baseurl + data.data.headImg
-
-      this.isShow = "true"
+      this.headImg = data.data.headImg
     }
     this.userid = id;
-    // debugger;
     
-    if(this.$route.name === "personal"){
-      console.log("打印一下数据拉",this.$route.name);
-      this.isShow = "true";
-      let data = JSON.parse(localStorage.getItem("user"));
-      // data.headImg = this.$baseurl+ data.headImg
-      this.headImg = this.$baseurl + data.headImg
-      this.ruleForm = {...data}
-      this.ruleFormOld = {...data};
-      this.userid = data._id
-    }
 
   },
   watch: {
     '$route.name'(newVal,oldVal){
-      // console.log('$route change',newVal,oldVal);
+      console.log('$route change',newVal,oldVal);
       if(newVal === 'userAdd'){
-        this.isShow = ""
-        this.userid = ''
-        this.headImg = ""
+        this.userid = '',
         this.ruleForm = {
           login:"",
           username: "",
@@ -319,7 +287,6 @@ export default {
     display: block;
     // width: 100%;
     height: 100%;
-    left: 0px;
   }
   .el-breadcrumb{
     margin-bottom: 15px;

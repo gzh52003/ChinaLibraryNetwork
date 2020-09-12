@@ -157,7 +157,6 @@ export default {
         },
       });
       this.data = data.data;
-      console.log("this.data", this.data);
     },
     async getRecommend() {
       let booktype = this.booktype;
@@ -168,7 +167,7 @@ export default {
         },
       });
       this.recommend = recommend;
-      console.log(this.recommend);
+      //console.log(this.recommend);
     },
     add2cart() {
       // 添加当前商品到购物车;
@@ -197,31 +196,18 @@ export default {
         // this.$store.commit("addCartAsync",this);
       }
     },
-    buyNow(id) {
-      let goods = this.goods;
-      this.$store.commit("add", goods);
-      // .goodslist.unshift(goods)
-      //console.log("goodsid", id);
+    // buyNow(id) {
+    //   let goods = this.goods;
+    //   // console.log(goods);
+    //   this.$store.commit("add", goods);
+    //   // .goodslist.unshift(goods)
+    //   //console.log("goodsid", id);
 
-      // 添加当前商品到购物车，并跳转到购物车页面
-      this.add2cart();
-      this.$router.push("/cart");
-    },
+    //   // 添加当前商品到购物车，并跳转到购物车页面
+    //   this.add2cart();
+    //   this.$router.push("/cart");
+    // },
   },
-  computed: {
-    cartlist() {
-      //模块化，调用时候加上模块
-      return this.$store.state.cart.goodslist;
-    },
-  },
-  async created() {
-    let result = this.$route.params;
-    // console.log("result", result);
-    this.booktype = result.booktype;
-    let id = result.id;
-    this.getData(id);
-    this.getRecommend();
-    // this.toTop();  },
   
   mounted() {
     // 控制下菜单显示

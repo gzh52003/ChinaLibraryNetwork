@@ -1,5 +1,4 @@
 <template>
-  <!-- 商品编辑 -->
   <div>
     <!-- 面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -51,6 +50,7 @@
 <script>
 export default {
   data() {
+    //验证作者等的规则
     var checksellTitle = (rule, value, callback) => {
       if (!"value") {
         // 如果输入的值不符合规则，则提示信息
@@ -72,20 +72,19 @@ export default {
     };
 
     //判断书名是否已存在
-    var validateTitle = async (rule, value, callback) => {
+    var validateTitle = (rule, value, callback) => {
       if (value.trim() === "") {
         // 如果输入的值不符合规则，则提示信息
         return callback(new Error("书名不能为空"));
       } else {
         // 发起ajax请求
-        await this.$request
+        this.$request
           .get(`/goods/check?title=${this.ruleForm.title}&id=${this.goodsid}`)
           .then(({ data }) => {
-            console.log(666);
             if (data.code === 0) {
-              console.log("code0");
               callback(new Error("书名已存在"));
             } else {
+              // 规则通过后的回掉
               callback();
             }
           });
@@ -180,6 +179,13 @@ export default {
     };
   },
   watch: {
+    // 监听实例属性，如果有变化则执行这里的代码
+    //监听是一个函数
+    // 深度监听，监听ruleForm下的gender'
+    // 'ruleForm.gender':function(){},以下是简写
+    "ruleForm.gender"(newVal, oldVal) {
+      // console.log("gender", newVal, oldVal);
+    },
     //$route是当前信息
     "$route.path"(newVal, oldVal) {
       // console.log("$route change", newVal, oldVal);
@@ -203,10 +209,9 @@ export default {
   methods: {
     //修改数据并保存
     submitForm() {
-      // console.log(666666666);
       //触发校验，validate是用来校验的，valid为校验结果
       this.$refs["ruleForm"].validate(async (valid) => {
-        // console.log(13, 13131313);
+        console.log(13, valid);
         // valid为校验结果，全部校验通过是值为true,否则为false
         if (valid) {
           //所有的验证都通过时，才发送请求

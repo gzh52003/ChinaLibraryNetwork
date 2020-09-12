@@ -9,10 +9,9 @@
           <span>中国图书网后台管理系统</span>
         </el-col>
         <el-col :span="12" style="text-align:right;height: 60px;">
-          <el-avatar :size="50" style="vertical-align: top;margin-top:5px;margin-right:10px" :src="avatar">
-            <img :src="avatar" alt="头像">
-          </el-avatar>
-          <span style="font-size: 16px;margin-right: 20px;vertical-align: bottom;display: inline-block;height: 42px;">{{userinfo.roleName}}-{{userinfo.username}}</span>
+          <!-- <el-avatar :size="50" style="vertical-align: top;margin-top:5px;margin-right:10px" src="http://localhost:2003/uploads/avatar-1598079578699.jpg"></el-avatar> -->
+          <img src="../public/images/login_bg.jpg" style="vertical-align: top;margin-top:5px;margin-right:10px" width=50 height=50/>
+          <span style="font-size: 16px;margin-right: 20px;vertical-align: bottom;display: inline-block;height: 42px;">管理员-老李</span>
           <el-button style="vertical-align: bottom;" class="cancella" type="text" @click="cancellation" >注销</el-button>
         </el-col>
       </el-row>
@@ -53,6 +52,18 @@
         </el-menu>
       </el-aside>
       <el-main>
+        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        </el-breadcrumb>-->
+        <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/manage' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        </el-breadcrumb> -->
         <div style="padding:0px 0;">
           <router-view />
         </div>
@@ -66,8 +77,6 @@ export default {
   name: "App",
   data() {
     return {
-      userinfo:{},
-      avatar:"",
       activeIndex: "/home",
       openMenu: [],
       menu: [
@@ -167,11 +176,6 @@ export default {
       this.$router.push("/login")
     }
   },
-  created() {
-    this.userinfo = JSON.parse(localStorage.getItem("user"));
-    this.avatar = this.$baseurl+ this.userinfo.headImg
-    // console.log(this.userinfo);
-  },
   components: {},
 };
 </script>
@@ -218,7 +222,7 @@ body {
   position: relative;
   img{
     position: absolute;
-    left: 0;
+    left: 30px;
   }
 }
 </style>
