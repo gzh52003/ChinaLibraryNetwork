@@ -210,10 +210,12 @@ body {
 [v-cloak] {
     display: none !important;
 }
+
 .cancella>span{
   color: #fff;
   font-size: 16px;
 }
+//代码测试回滚
 .el-avatar{
   position: relative;
   img{
