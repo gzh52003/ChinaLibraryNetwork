@@ -210,7 +210,6 @@ body {
 [v-cloak] {
     display: none !important;
 }
-
 .cancella>span{
   color: #fff;
   font-size: 16px;
